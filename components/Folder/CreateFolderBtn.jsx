@@ -3,7 +3,6 @@ import React from 'react'
 const CreateFolderBtn = () => {
   return (
     <div>
-      {/* You can open the modal using document.getElementById('ID').showModal() method */}
       <button
         className=" w-48 flex gap-2 items-center bg-green-600 hover:brightness-105 text-white rounded-lg p-3"
         onClick={() => document.getElementById('my_modal_3').showModal()}

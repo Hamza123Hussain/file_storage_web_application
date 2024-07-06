@@ -1,5 +1,6 @@
 'use client'
 
+import FolderList from '@/components/Folder/FolderList'
 import { useUser } from '@auth0/nextjs-auth0/client'
 
 export default function ProfileClient() {
@@ -11,10 +12,7 @@ export default function ProfileClient() {
   return (
     user && (
       <div>
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-        <a href="/api/auth/login">Login</a>
-        <a href="/api/auth/logout">Logout</a>
+        <FolderList />
       </div>
     )
   )

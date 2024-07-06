@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
-import CreateFolderBtn from './CreateFolderBtn'
+import CreateFolderBtn from './Folder/CreateFolderBtn'
 
 const SideNav = () => {
   const { user, error, isLoading } = useUser()

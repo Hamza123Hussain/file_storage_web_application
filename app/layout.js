@@ -18,8 +18,8 @@ export default function RootLayout({ children }) {
         <body className={inter.className}>
           <div className=" gap-5  flex">
             <SideNav />
-            <div className=" grid grid-cols-1 md:grid-cols-3 w-full">
-              <div className=" sm:col-span-2">{children}</div>
+            <div className=" grid grid-cols-1 md:grid-cols-3 w-full gap-3">
+              <div className="col-span-2">{children}</div>
               <div className=" p-5 bg-white">
                 <Storage />
               </div>
