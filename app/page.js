@@ -1,15 +1,22 @@
-import Image from 'next/image'
+'use client'
 
-export default function Home() {
+import { useUser } from '@auth0/nextjs-auth0/client'
+
+export default function ProfileClient() {
+  const { user, error, isLoading } = useUser()
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>{error.message}</div>
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <button className="btn">Button</button>
-      <button className="btn btn-neutral">Neutral</button>
-      <button className="btn btn-primary">Primary</button>
-      <button className="btn btn-secondary">Secondary</button>
-      <button className="btn btn-accent">Accent</button>
-      <button className="btn btn-ghost">Ghost</button>
-      <button className="btn btn-link">Link</button>
-    </main>
+    user && (
+      <div>
+        <img src={user.picture} alt={user.name} />
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
+        <a href="/api/auth/login">Login</a>
+        <a href="/api/auth/logout">Logout</a>
+      </div>
+    )
   )
 }
