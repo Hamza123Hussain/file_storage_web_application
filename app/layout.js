@@ -15,10 +15,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <UserProvider>
-        <body className={inter.className}>
+        <body className=" bg-gray-400">
           <div className=" gap-5  flex">
             <SideNav />
-            <div className=" grid grid-cols-1 md:grid-cols-3 w-full gap-3">
+            <div className=" grid grid-cols-1 p-2 sm:p-0 md:grid-cols-3 w-full gap-3">
               <div className="col-span-2">{children}</div>
               <div className=" p-5 bg-white">
                 <Storage />
