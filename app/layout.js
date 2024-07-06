@@ -1,6 +1,9 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
+import SideNav from '@/components/SideNav'
+import Home from '@/components/Home'
+import Storage from '@/components/Storage'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -13,7 +16,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <UserProvider>
         <body className={inter.className}>
-          {children} <a href="/api/auth/login">Login</a>
+          <div className=" gap-5  flex">
+            <SideNav />
+            <div className=" grid grid-cols-1 md:grid-cols-3 w-full">
+              <div className=" sm:col-span-2">{children}</div>
+              <div className=" p-5 bg-white">
+                <Storage />
+              </div>
+            </div>
+          </div>
         </body>
       </UserProvider>
     </html>
