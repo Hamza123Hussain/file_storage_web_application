@@ -3,10 +3,11 @@ import { Sidebaritems } from '@/utils/ArrayforSideBar'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import CreateFolderBtn from './Folder/CreateFolderBtn'
 
 const SideNav = () => {
+  const [activeindex, setindex] = useState(null)
   const { user, error, isLoading } = useUser()
   return (
     <div className=" flex flex-col  h-screen border-2 py-4 sticky top-0 ">
@@ -43,14 +44,17 @@ const SideNav = () => {
       <div className=" p-4">
         <CreateFolderBtn />
       </div>
-      <div className=" p-4 flex flex-col gap-5">
+      <div className=" p-4 flex flex-col gap-2">
         {Sidebaritems.map((element, index) => {
           return (
             <div
               key={index}
-              className=" flex w-48 p-3 items-center gap-5 rounded-lg bg-white hover:bg-blue-400"
+              onClick={() => setindex(index)}
+              className={`flex w-48 p-2 items-center gap-2 rounded-lg bg-white hover:bg-blue-400 ${
+                index == activeindex ? 'bg-green-700 text-white ' : ''
+              }`}
             >
-              {element.Icon} <span className=" text-2xl">{element.Name}</span>
+              {element.Icon} <span className=" text-xl">{element.Name}</span>
             </div>
           )
         })}
@@ -58,7 +62,7 @@ const SideNav = () => {
       <div>
         {user?.name != '' ? (
           <div className=" flex gap-5 p-4 items-center">
-            <h2 className=" font-bold text-2xl">{user?.name}</h2>
+            <h2 className=" font-bold text-xl">{user?.name}</h2>
             <button>
               <a href="/api/auth/logout">
                 <LogOut />

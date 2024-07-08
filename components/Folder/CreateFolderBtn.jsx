@@ -1,6 +1,9 @@
-import React from 'react'
+import { CreateFolder } from '@/functions/CreateFolder'
+import React, { useState } from 'react'
 
 const CreateFolderBtn = () => {
+  const [foldername, setname] = useState('')
+
   return (
     <div>
       <button
@@ -31,8 +34,25 @@ const CreateFolderBtn = () => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          <h3 className="font-bold text-lg">Add A Folder</h3>
+          <div className="py-4 flex flex-col">
+            {' '}
+            <input
+              value={foldername}
+              onChange={(e) => setname(e.target.value)}
+              type="text"
+              placeholder="Enter Folder Name"
+              className=" p-3 w-full rounded-lg border-2 border-r-slate-100"
+            />
+            <div className=" flex justify-end mt-2">
+              <button
+                onClick={() => CreateFolder(foldername)}
+                className=" px-3 py-1 hover:brightness-105 text-white bg-green-400 rounded-lg"
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </div>
       </dialog>
     </div>
