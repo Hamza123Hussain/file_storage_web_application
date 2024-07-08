@@ -1,4 +1,6 @@
+'use client'
 import { CreateFolder } from '@/functions/CreateFolder'
+
 import React, { useState } from 'react'
 
 const CreateFolderBtn = () => {

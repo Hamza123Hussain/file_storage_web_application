@@ -43,7 +43,7 @@ const FolderList = () => {
       <div className=" grid grid-cols-1 gap-2  sm:grid-cols-3 ">
         {folderData.map((element, index) => (
           <div key={index}>
-            <FolderItems Name={element.FolderName} ICON={<Folder />} />
+            <FolderItems Folder={element} ICON={<Folder />} />
           </div>
         ))}
       </div>
