@@ -23,7 +23,7 @@ const FolderList = () => {
     }
 
     fetchData()
-  }, [])
+  }, [folderData])
 
   if (loading)
     return (

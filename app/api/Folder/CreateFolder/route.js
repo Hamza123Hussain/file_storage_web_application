@@ -1,11 +1,12 @@
-import { supabase } from '@/utils/Supabaseconfig'
+import { supabase } from '../../../../utils/Supabaseconfig'
 import { NextResponse } from 'next/server'
 export const POST = async (req) => {
   try {
     const payload = await req.json()
     const { data, error } = await supabase.from('Folder').insert([
       {
-        FolderName: payload.Name,
+        FolderName: payload?.Name,
+        parentID: payload?.ParentID,
       },
     ])
     if (error) {

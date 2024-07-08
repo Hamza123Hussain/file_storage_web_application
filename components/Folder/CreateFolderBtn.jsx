@@ -1,18 +1,32 @@
 'use client'
-import { CreateFolder } from '@/functions/CreateFolder'
+// components/CreateFolderBtn.js
 
-import React, { useState } from 'react'
+import { CreateFolder } from '@/functions/CreateFolder'
+import { ParentIdContext } from '@/utils/Context'
+import React, { useContext, useState } from 'react'
 
 const CreateFolderBtn = () => {
   const [foldername, setname] = useState('')
+  const { parentId } = useContext(ParentIdContext)
+
+  const handleCreateFolder = async () => {
+    try {
+      await CreateFolder(foldername, parentId)
+      // Optionally, you can handle success feedback here
+    } catch (error) {
+      // Handle error cases
+      console.error('Error creating folder:', error)
+      alert('Failed to create folder')
+    }
+  }
 
   return (
     <div>
       <button
-        className=" w-48 flex gap-2 items-center bg-green-600 hover:brightness-105 text-white rounded-lg p-3"
+        className="w-48 flex gap-2 items-center bg-green-600 hover:brightness-105 text-white rounded-lg p-3"
         onClick={() => document.getElementById('my_modal_3').showModal()}
       >
-        <span className=" text-lg">Add A Folder</span>
+        <span className="text-lg">Add A Folder</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -31,25 +45,23 @@ const CreateFolderBtn = () => {
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
           <h3 className="font-bold text-lg">Add A Folder</h3>
           <div className="py-4 flex flex-col">
-            {' '}
             <input
               value={foldername}
               onChange={(e) => setname(e.target.value)}
               type="text"
               placeholder="Enter Folder Name"
-              className=" p-3 w-full rounded-lg border-2 border-r-slate-100"
+              className="p-3 w-full rounded-lg border-2 border-r-slate-100"
             />
-            <div className=" flex justify-end mt-2">
+            <div className="flex justify-end mt-2">
               <button
-                onClick={() => CreateFolder(foldername)}
-                className=" px-3 py-1 hover:brightness-105 text-white bg-green-400 rounded-lg"
+                onClick={handleCreateFolder}
+                className="px-3 py-1 hover:brightness-105 text-white bg-green-400 rounded-lg"
               >
                 Save
               </button>
