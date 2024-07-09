@@ -24,7 +24,7 @@ const Folderbtn = () => {
     <div>
       <button
         className="w-48 flex gap-2 items-center bg-green-600 hover:brightness-105 text-white rounded-lg p-3"
-        onClick={() => document.getElementById('my_modal_3').showModal()}
+        onClick={() => document.getElementById('my_modal_1').showModal()}
       >
         <span className="text-lg">Add A Folder</span>
         <svg
@@ -42,7 +42,7 @@ const Folderbtn = () => {
           />
         </svg>
       </button>
-      <dialog id="my_modal_3" className="modal">
+      <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const GetFile = async () => {
   try {
-    const response = await axios.get('/api/File/GetFile')
+    const response = await axios.get('/api/File/GetRecentFiles')
     // console.log('API Response:', response.data)
     return response.data
   } catch (error) {
