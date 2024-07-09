@@ -1,52 +1,41 @@
 // pages/Folder.jsx
 'use client'
-import axios from 'axios'
+
 import React, { useContext, useEffect, useState } from 'react'
 import { ParentIdContext } from '@/utils/Context'
-import { createClient } from '@supabase/supabase-js' // Import createClient from Supabase
-
-const supabaseUrl = 'https://msmetpsnmkznujcdtqub.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY // Replace with your Supabase anon key
-
-const supabase = createClient(supabaseUrl, supabaseKey) // Initialize Supabase client
+import { FolderClosed } from 'lucide-react'
+import { getFolderData } from '@/functions/GetFolderDataById'
+import FolderItems from '@/components/Folder/FolderItems'
 
 const Folder = ({ params }) => {
   const { setParentId } = useContext(ParentIdContext)
-  const [folderData, setFolderData] = useState(null)
+  const [folderData, setFolderData] = useState([])
 
-  const getFolderData = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('Folder')
-        .select('*')
-        .eq('parentID', params.ID) // Use params.ID directly here
-
-      if (error) {
-        console.error('Error fetching data from Supabase:', error.message)
-      } else {
-        console.log('Data fetched successfully:', data)
-        setFolderData(data) // Update state with fetched data
-      }
-    } catch (error) {
-      console.error('Unexpected error occurred:', error)
-    }
+  const GETDATA = async () => {
+    const data = await getFolderData(params.ID)
+    setFolderData(data)
   }
 
   useEffect(() => {
     setParentId(params.ID)
-    getFolderData()
+    GETDATA()
   }, [])
 
+  if (folderData.length > 0) {
+    console.log(folderData)
+  }
   return (
-    <div>
-      <h1>HELLO FOLDER {params.ID}</h1>
-      {/* Display folderData here */}
-      {folderData && (
-        <div>
-          <h2>Folder Name: {folderData.FolderName}</h2>
-          {/* Add more details as needed */}
-        </div>
-      )}
+    <div className=" border-2 rounded-lg p-4 mt-5">
+      <h1 className=" font-extrabold text-lg ">Folders</h1>
+      <div className=" grid grid-cols-1 gap-2  sm:grid-cols-3 ">
+        {folderData.map((Element) => {
+          return (
+            <div key={Element.id}>
+              <FolderItems Folder={Element} ICON={<FolderClosed />} />
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
