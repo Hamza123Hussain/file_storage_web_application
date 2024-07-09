@@ -1,10 +1,10 @@
 'use client'
 import { Folder } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import FolderItems from './FolderItems'
-import { GetFolder } from '@/functions/GetFolder'
-import Loader from '../Loader'
-import Link from 'next/link'
+
+import { GetFolders } from '@/functions/GetFolders'
+import FolderItems from '@/components/Folder/FolderItems'
+import Loader from '@/components/Loader'
 
 const FolderList = () => {
   const [folderData, setFolderData] = useState([])
@@ -14,7 +14,7 @@ const FolderList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await GetFolder()
+        const data = await GetFolders()
         setFolderData(data.data)
       } catch (error) {
         setError(error.message)
@@ -38,10 +38,7 @@ const FolderList = () => {
   return (
     <div className="bg-white mt-4 p-3 rounded-lg ">
       <div className=" flex justify-between">
-        <h1 className=" text-xl font-extrabold">Recent Folders</h1>
-        <Link href={'/Folders'} className=" hover:text-blue-500 text-blue-300">
-          View All
-        </Link>
+        <h1 className=" text-xl font-extrabold">All Folders</h1>
       </div>
       <div className=" grid grid-cols-1 gap-2  sm:grid-cols-3 ">
         {folderData.map((element, index) => (
