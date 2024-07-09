@@ -60,7 +60,12 @@ const CreateFileBTN = () => {
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button
+              onClick={() => {
+                setFileDetails({ File: {}, Name: '' })
+              }}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
               ✕
             </button>
           </form>
@@ -90,6 +95,20 @@ const CreateFileBTN = () => {
               <div className=" text-xs text-gray-400 capitalize">
                 Note : Only A File Upto 5MB can be Uploaded on This Website
               </div>
+              {File.File.size > 0 ? (
+                <div className=" flex justify-between gap-10 items-center text-xs sm:text-sm text-green-400 font-bold ">
+                  <h3>
+                    {' '}
+                    FileName: {File.Name == '' ? File.File.name : File.Name}
+                  </h3>
+                  <h3>
+                    {' '}
+                    Size :{(File.File.size / (1024 * 1024)).toFixed(2)} MB
+                  </h3>
+                </div>
+              ) : (
+                ''
+              )}
             </div>
             <div className="flex justify-end mt-2">
               <button
