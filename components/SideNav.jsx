@@ -6,6 +6,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import CreateFileBTN from './Files/CreateFile'
 import Folderbtn from './Folder/CreateFolderBtn'
+import Link from 'next/link'
 
 const SideNav = () => {
   const [activeindex, setindex] = useState(null)
@@ -27,25 +28,27 @@ const SideNav = () => {
       <div className=" p-4">
         <CreateFileBTN />
       </div>
+      <div className=" p-4">
+        <Folderbtn />
+      </div>
 
       <div className=" p-4 flex flex-col gap-2">
         {Sidebaritems.map((element, index) => {
           return (
-            <div
+            <Link
+              href={element.href}
               key={index}
               onClick={() => setindex(index)}
               className={`flex w-48 p-2 items-center gap-2 rounded-lg bg-white hover:bg-blue-400 ${
-                index == activeindex ? 'bg-green-700 text-white ' : ''
+                index == activeindex ? 'bg-green-300 text-white ' : ''
               }`}
             >
               {element.Icon} <span className=" text-xl">{element.Name}</span>
-            </div>
+            </Link>
           )
         })}
       </div>
-      <div className=" p-4">
-        <Folderbtn />
-      </div>
+
       <div>
         {user?.name !== '' ? (
           <div className=" flex gap-5 p-4 items-center">

@@ -4,13 +4,13 @@ export const Sidebaritems = [
   {
     Name: 'Home',
     Icon: <House />,
-    href: '',
+    href: '/DashBoard',
   },
   {
     Name: 'My Files',
     Icon: <File />,
-    href: '',
+    href: 'Files',
   },
-  { Name: 'Important', Icon: <Star />, href: '' },
-  { Name: 'Trash', Icon: <Trash />, href: '' },
+  { Name: 'Important', Icon: <Star />, href: 'Important' },
+  { Name: 'Trash', Icon: <Trash />, href: 'Trash' },
 ]
