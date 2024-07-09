@@ -5,6 +5,7 @@ import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import CreateFolderBtn from './Folder/CreateFolderBtn'
+import CreateFileBTN from './Files/CreateFile'
 
 const SideNav = () => {
   const [activeindex, setindex] = useState(null)
@@ -23,23 +24,7 @@ const SideNav = () => {
         </h1>
       </div>
       <div className=" p-4">
-        <button className="w-48 flex gap-2 items-center bg-blue-600 hover:brightness-105 text-white rounded-lg p-3">
-          <span className=" text-lg">Add A File</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          </svg>
-        </button>
+        <CreateFileBTN />
       </div>
       <div className=" p-4">
         <CreateFolderBtn />
