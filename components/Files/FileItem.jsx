@@ -10,7 +10,7 @@ const FileItem = ({ File }) => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>CreatedAt</th>
+              <th>Created At</th>
               <th>Size</th>
               <th>Options</th>
             </tr>
@@ -19,8 +19,8 @@ const FileItem = ({ File }) => {
             {/* row 1 */}
             <tr>
               <td>{File.Name}</td>
-              <td>{File.CreatedAt}</td>
-              <td>{File.FileSize}</td>
+              <td>{File.LastModified}</td>
+              <td>{File.size}MB</td>
               <td className=" flex gap-2 ">
                 {' '}
                 <button className=" flex gap-2 items-center p-2 bg-green-400 rounded-lg">
@@ -40,3 +40,21 @@ const FileItem = ({ File }) => {
 }
 
 export default FileItem
+/**Name
+: 
+"Hamza Doc"
+created_at
+: 
+"2024-07-09T12:04:15.403806+00:00"
+id
+: 
+"41e7e397-dbcb-4f83-a818-d05c2ada8c9f"
+parentID
+: 
+"78e6dfba-39ac-47cd-82ba-5ec70fbc596f"
+size
+: 
+47579
+type
+: 
+"application/pdf" */

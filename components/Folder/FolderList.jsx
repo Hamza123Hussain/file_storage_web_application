@@ -32,7 +32,7 @@ const FolderList = () => {
       </div>
     )
 
-  if (folderData.length > 1) console.log('Folder data:', folderData)
+  // if (folderData.length > 1) console.log('Folder data:', folderData)
 
   return (
     <div className="bg-white mt-4 p-3 rounded-lg ">
