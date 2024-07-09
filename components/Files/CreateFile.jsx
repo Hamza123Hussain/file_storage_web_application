@@ -1,29 +1,36 @@
 'use client'
 import { CreateFile } from '@/functions/CreateFile'
+import { getFileType } from '@/functions/FileTypesShort'
 import { ParentIdContext } from '@/utils/Context'
 import React, { useContext, useState } from 'react'
 
 const CreateFileBTN = () => {
-  const [File, setFileDetails] = useState({ Name: '', File: {} })
+  const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
   const { parentId } = useContext(ParentIdContext)
 
   const AddFileTOSupabase = async () => {
-    try {
-      await CreateFile(File, parentId)
-      // Optionally, you can handle success feedback here
-    } catch (error) {
-      // Handle error cases
-      console.error('Error creating file:', error)
-      alert('Failed to create File')
+    if ((File.File.size / (1024 * 1024)).toFixed(2) < 1000) {
+      try {
+        await CreateFile(File, parentId)
+        // Optionally, you can handle success feedback here
+      } catch (error) {
+        // Handle error cases
+        console.error('Error creating file:', error)
+        alert('Failed to create File')
+      }
+    } else {
+      alert('FILE IS LARGER THAN 1 GB')
     }
   }
 
   const ChangeValue = (e) => {
     const { name, value, files } = e.target
     if (name === 'File') {
+      const fileType = getFileType(files[0]?.type)
       setFileDetails((prev) => ({
         ...prev,
         [name]: files[0],
+        FileType: fileType,
       }))
     } else {
       setFileDetails((prev) => ({
@@ -31,9 +38,8 @@ const CreateFileBTN = () => {
         [name]: value,
       }))
     }
+    console.log(File)
   }
-
-  console.log(File)
 
   return (
     <div>
@@ -79,8 +85,8 @@ const CreateFileBTN = () => {
               placeholder="Enter File Name"
               className="p-3 w-full rounded-lg border-2 border-r-slate-100"
             />
-            <div className=" flex flex-col justify-center items-start gap-2">
-              <div className="relative w-full mt-4 ">
+            <div className="flex flex-col justify-center items-start gap-2">
+              <div className="relative w-full mt-4">
                 <label className="flex items-center hover:shadow-amber-900 hover:shadow-md justify-center w-full p-3 rounded-full bg-green-500 text-white cursor-pointer hover:bg-green-600 transition duration-300 ease-in-out">
                   <span>Add A File You Want to Upload</span>
                   <input
@@ -92,18 +98,14 @@ const CreateFileBTN = () => {
                   />
                 </label>
               </div>
-              <div className=" text-xs text-gray-400 capitalize">
-                Note : Only A File Upto 5MB can be Uploaded on This Website
+              <div className="text-xs text-gray-400 capitalize">
+                Note : Only A File Upto 1GB can be Uploaded on This Website
               </div>
               {File.File.size > 0 ? (
-                <div className=" flex justify-between gap-10 items-center text-xs sm:text-sm text-green-400 font-bold ">
+                <div className="flex justify-between gap-10 items-center text-xs sm:text-sm text-green-400 font-bold">
+                  <h3>FileType: {File.FileType}</h3>
                   <h3>
-                    {' '}
-                    FileName: {File.Name == '' ? File.File.name : File.Name}
-                  </h3>
-                  <h3>
-                    {' '}
-                    Size :{(File.File.size / (1024 * 1024)).toFixed(2)} MB
+                    Size: {(File.File.size / (1024 * 1024)).toFixed(2)} MB
                   </h3>
                 </div>
               ) : (
