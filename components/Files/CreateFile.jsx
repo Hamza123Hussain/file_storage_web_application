@@ -64,7 +64,7 @@ const CreateFileBTN = () => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Add A Folder</h3>
+          <h3 className="font-bold text-lg">Add A File</h3>
           <div className="py-4 flex flex-col">
             <input
               value={File.Name}
@@ -74,14 +74,23 @@ const CreateFileBTN = () => {
               placeholder="Enter File Name"
               className="p-3 w-full rounded-lg border-2 border-r-slate-100"
             />
-            <input
-              name="File"
-              type="file"
-              onChange={ChangeValue}
-              placeholder="Enter File"
-              className="p-3 w-full rounded-lg border-2 border-r-slate-100"
-            />
-
+            <div className=" flex flex-col justify-center items-start gap-2">
+              <div className="relative w-full mt-4 ">
+                <label className="flex items-center hover:shadow-amber-900 hover:shadow-md justify-center w-full p-3 rounded-full bg-green-500 text-white cursor-pointer hover:bg-green-600 transition duration-300 ease-in-out">
+                  <span>Add A File You Want to Upload</span>
+                  <input
+                    name="File"
+                    type="file"
+                    onChange={ChangeValue}
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    placeholder="Enter File"
+                  />
+                </label>
+              </div>
+              <div className=" text-xs text-gray-400 capitalize">
+                Note : Only A File Upto 5MB can be Uploaded on This Website
+              </div>
+            </div>
             <div className="flex justify-end mt-2">
               <button
                 onClick={AddFileTOSupabase}

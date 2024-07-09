@@ -5,7 +5,7 @@ import { CreateFolder } from '@/functions/CreateFolder'
 import { ParentIdContext } from '@/utils/Context'
 import React, { useContext, useState } from 'react'
 
-const CreateFolderBtn = () => {
+const Folderbtn = () => {
   const [foldername, setname] = useState('')
   const { parentId } = useContext(ParentIdContext)
 
@@ -73,4 +73,4 @@ const CreateFolderBtn = () => {
   )
 }
 
-export default CreateFolderBtn
+export default Folderbtn

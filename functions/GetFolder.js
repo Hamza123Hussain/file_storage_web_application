@@ -3,7 +3,7 @@ import axios from 'axios'
 export const GetFolder = async () => {
   try {
     const response = await axios.get('/api/Folder/GetFolder')
-    console.log('API Response:', response.data)
+    // console.log('API Response:', response.data)
     return response.data
   } catch (error) {
     console.error('Error fetching data:', error)

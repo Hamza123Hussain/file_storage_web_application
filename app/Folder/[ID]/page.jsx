@@ -26,12 +26,12 @@ const Folder = ({ params }) => {
     GETDATA()
   }, [])
 
-  if (folderData.length > 0) {
-    console.log(folderData)
-  }
-  if (fileData.length > 0) {
-    console.log(fileData)
-  }
+  // if (folderData.length > 0) {
+  //   console.log(folderData)
+  // }
+  // if (fileData.length > 0) {
+  //   console.log(fileData)
+  // }
   return (
     <div className=" flex flex-col  ">
       <div className=" border-2 rounded-lg p-4 mt-5">

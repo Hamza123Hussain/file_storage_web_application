@@ -4,12 +4,13 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import CreateFolderBtn from './Folder/CreateFolderBtn'
 import CreateFileBTN from './Files/CreateFile'
+import Folderbtn from './Folder/CreateFolderBtn'
 
 const SideNav = () => {
   const [activeindex, setindex] = useState(null)
   const { user, error, isLoading } = useUser()
+  console.log(user)
   return (
     <div className=" flex flex-col  h-screen border-2 py-4 sticky top-0 ">
       <div className=" flex items-center ">
@@ -26,9 +27,7 @@ const SideNav = () => {
       <div className=" p-4">
         <CreateFileBTN />
       </div>
-      <div className=" p-4">
-        <CreateFolderBtn />
-      </div>
+
       <div className=" p-4 flex flex-col gap-2">
         {Sidebaritems.map((element, index) => {
           return (
@@ -44,12 +43,15 @@ const SideNav = () => {
           )
         })}
       </div>
+      <div className=" p-4">
+        <Folderbtn />
+      </div>
       <div>
-        {user?.name != '' ? (
+        {user?.name !== '' ? (
           <div className=" flex gap-5 p-4 items-center">
             <h2 className=" font-bold text-xl">{user?.name}</h2>
             <button>
-              <a href="/api/auth/logout">
+              <a href="/api/auth/login">
                 <LogOut />
               </a>
             </button>

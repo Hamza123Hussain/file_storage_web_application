@@ -10,7 +10,7 @@ export const GetFileData = async (ID) => {
     if (error) {
       console.error('Error fetching data from Supabase:', error.message)
     } else {
-      console.log('Data fetched successfully:', data)
+      // console.log('Data fetched successfully:', data)
       return data
     }
   } catch (error) {
