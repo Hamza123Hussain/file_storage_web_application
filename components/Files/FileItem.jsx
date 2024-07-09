@@ -1,3 +1,5 @@
+import { deleteFile } from '@/functions/DeleteFromFIle'
+import { CreateTrash } from '@/functions/StoreTrash'
 import { Delete, Download } from 'lucide-react'
 import React from 'react'
 
@@ -26,7 +28,12 @@ const FileItem = ({ File }) => {
                 <button className=" flex gap-2 items-center p-2 bg-green-400 rounded-lg">
                   <h3> Download</h3> <Download />
                 </button>
-                <button className=" flex gap-2  p-2 bg-red-400 rounded-lg">
+                <button
+                  onClick={() => {
+                    deleteFile(File.id)
+                  }}
+                  className=" flex gap-2  p-2 bg-red-400 rounded-lg"
+                >
                   <h3>Delete</h3>
                   <Delete />
                 </button>
