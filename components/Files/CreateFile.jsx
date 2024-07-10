@@ -101,7 +101,7 @@ const CreateFileBTN = () => {
               <div className="text-xs text-gray-400 capitalize">
                 Note : Only A File Upto 1GB can be Uploaded on This Website
               </div>
-              {File.File.size > 0 ? (
+              {File?.File?.size > 0 ? (
                 <div className="flex justify-between gap-10 items-center text-xs sm:text-sm text-green-400 font-bold">
                   <h3>FileType: {File.FileType}</h3>
                   <h3>

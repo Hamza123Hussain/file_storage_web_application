@@ -19,10 +19,10 @@ const FileItem = ({ File }) => {
           <tbody>
             {/* row 1 */}
             <tr>
-              <td className=" w-1/4">{File.Name}</td>
-              <td className=" w-1/4">{File.LastModified}</td>
-              <td className=" w-1/4">{File.size}MB</td>
-              <td className=" w-1/4 flex gap-2 ">
+              <td className=" w-5/12 text-[10px]">{File.Name}</td>
+              <td className=" w-4/12">{File.LastModified}</td>
+              <td className=" w-3/12">{File.size} MB</td>
+              <td className=" w-2/12 flex gap-2 ">
                 {' '}
                 <button className=" flex gap-2 items-center p-2 bg-green-400 rounded-lg">
                   <h3> Download</h3> <Download />

@@ -1,10 +1,9 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
-import SideNav from '@/components/SideNav'
-
-import Storage from '@/components/Storage'
-import { ContextProvider, ParentIdProvider } from '@/utils/Context'
+import dynamic from 'next/dynamic'
+import { ParentIdProvider } from '@/utils/Context'
+import MainLayout from '@/components/MainLayout'
 
 export const metadata = {
   title: 'CLOUD CABINET',
@@ -16,17 +15,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <UserProvider>
         <ParentIdProvider>
-          <body className=" bg-gray-400">
-            <div className=" gap-5  flex">
-              <SideNav />
-              <div className=" grid grid-cols-1 p-2 sm:p-0 md:grid-cols-3 w-full gap-3">
-                <div className="col-span-2">{children}</div>
-
-                <div className=" p-5 bg-white">
-                  <Storage />
-                </div>
-              </div>
-            </div>
+          <body className="bg-green-200">
+            <MainLayout>{children}</MainLayout>
           </body>
         </ParentIdProvider>
       </UserProvider>

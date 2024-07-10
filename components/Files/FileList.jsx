@@ -15,22 +15,19 @@ const FileList = () => {
   const [FileData, setFileData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await GetFile()
-        setFileData(data.data)
-      } catch (error) {
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
+  const fetchData = async () => {
+    try {
+      const data = await GetFile()
+      setFileData(data.data)
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
     }
-
+  }
+  useEffect(() => {
     fetchData()
   }, [FileData])
-
   if (loading)
     return (
       <div>

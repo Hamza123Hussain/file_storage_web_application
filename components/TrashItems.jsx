@@ -19,10 +19,10 @@ const TrashItem = ({ File }) => {
           <tbody>
             {/* row 1 */}
             <tr>
-              <td className=" w-1/4">{File.Name}</td>
-              <td className=" w-1/4">{File.LastModified}</td>
-              <td className=" w-1/4">{File.size} MB</td>
-              <td className=" w-1/4 flex gap-2 ">
+              <td className=" w-3/6 text-xs">{File.Name}</td>
+              <td className=" w-1/6">{File.LastModified}</td>
+              <td className=" w-1/6">{File.size} MB</td>
+              <td className=" w-1/6 flex gap-2 ">
                 {' '}
                 <button
                   onClick={() => {

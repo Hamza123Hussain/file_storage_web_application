@@ -21,7 +21,7 @@ const Files = () => {
     const fetchData = async () => {
       try {
         const data = await GetFiles()
-        setFileData(data.data)
+        setFileData(data)
       } catch (error) {
         setError(error.message)
       } finally {
@@ -30,7 +30,7 @@ const Files = () => {
     }
 
     fetchData()
-  }, [FileData])
+  }, [])
 
   if (loading)
     return (
