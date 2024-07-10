@@ -27,8 +27,8 @@ const VideoStore = () => {
     { totalFiles: 0, totalSize: 0 }
   )
 
-  console.log('Total number of files:', totalFiles)
-  console.log('Total size of files:', totalSize)
+  // console.log('Total number of files:', totalFiles)
+  // console.log('Total size of files:', totalSize)
 
   if (error) {
     return <div>Error: {error}</div> // Render an error message if there's an issue with API call

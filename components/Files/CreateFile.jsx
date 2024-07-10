@@ -1,18 +1,29 @@
 'use client'
 import { CreateFile } from '@/functions/CreateFile'
+import { fetchData } from '@/functions/FetchDataFiles'
 import { getFileType } from '@/functions/FileTypesShort'
 import { ParentIdContext } from '@/utils/Context'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
-  const { parentId } = useContext(ParentIdContext)
+  const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
+  const [filecreated, setfilecreated] = useState(false)
+  const Getdata = async () => {
+    setLoading(true)
+    const data = await fetchData()
+    if (data) {
+      console.log('DATA FETCHED', data)
+      setFileData(data)
+      setLoading(false)
+    }
+  }
 
   const AddFileTOSupabase = async () => {
     if ((File.File.size / (1024 * 1024)).toFixed(2) < 1000) {
       try {
         await CreateFile(File, parentId)
-        // Optionally, you can handle success feedback here
+        setfilecreated(true)
       } catch (error) {
         // Handle error cases
         console.error('Error creating file:', error)
@@ -40,7 +51,12 @@ const CreateFileBTN = () => {
     }
     console.log(File)
   }
-
+  useEffect(() => {
+    if (filecreated) {
+      Getdata()
+      setfilecreated(false)
+    }
+  }, [filecreated])
   return (
     <div>
       <button

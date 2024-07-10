@@ -8,11 +8,11 @@ import React, { useContext, useState } from 'react'
 const Folderbtn = () => {
   const [foldername, setname] = useState('')
   const { parentId } = useContext(ParentIdContext)
-
+  const [isopen, setopen] = useState(false)
   const handleCreateFolder = async () => {
     try {
       await CreateFolder(foldername, parentId)
-      // Optionally, you can handle success feedback here
+      setopen(false)
     } catch (error) {
       // Handle error cases
       console.error('Error creating folder:', error)
@@ -24,7 +24,9 @@ const Folderbtn = () => {
     <div>
       <button
         className="w-48 flex gap-2 items-center bg-green-600 hover:brightness-105 text-white rounded-lg p-3"
-        onClick={() => document.getElementById('my_modal_1').showModal()}
+        onClick={() => {
+          document.getElementById('my_modal_1').showModal(), setopen(true)
+        }}
       >
         <span className="text-lg">Add A Folder</span>
         <svg
@@ -42,33 +44,40 @@ const Folderbtn = () => {
           />
         </svg>
       </button>
-      <dialog id="my_modal_1" className="modal">
-        <div className="modal-box">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
-          <h3 className="font-bold text-lg">Add A Folder</h3>
-          <div className="py-4 flex flex-col">
-            <input
-              value={foldername}
-              onChange={(e) => setname(e.target.value)}
-              type="text"
-              placeholder="Enter Folder Name"
-              className="p-3 w-full rounded-lg border-2 border-r-slate-100"
-            />
-            <div className="flex justify-end mt-2">
+      {setopen ? (
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
               <button
-                onClick={handleCreateFolder}
-                className="px-3 py-1 hover:brightness-105 text-white bg-green-400 rounded-lg"
+                onClick={() => setopen(false)}
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
               >
-                Save
+                ✕
               </button>
+            </form>
+            <h3 className="font-bold text-lg">Add A Folder</h3>
+            <div className="py-4 flex flex-col">
+              <input
+                value={foldername}
+                onChange={(e) => setname(e.target.value)}
+                type="text"
+                placeholder="Enter Folder Name"
+                className="p-3 w-full rounded-lg border-2 border-r-slate-100"
+              />
+              <div className="flex justify-end mt-2">
+                <button
+                  onClick={handleCreateFolder}
+                  className="px-3 py-1 hover:brightness-105 text-white bg-green-400 rounded-lg"
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </dialog>
+        </dialog>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

@@ -7,7 +7,6 @@ import { FileIcon, FolderClosed } from 'lucide-react'
 import { getFolderData } from '@/functions/GetFolderDataById'
 import FolderItems from '@/components/Folder/FolderItems'
 import { GetFileData } from '@/functions/GetFileDataById'
-import FileItem from '@/components/Files/FileItem'
 import FilePreview from '@/components/Files/FilePreview'
 
 const Folder = ({ params }) => {
