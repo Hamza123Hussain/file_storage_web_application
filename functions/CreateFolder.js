@@ -1,6 +1,7 @@
 // functions/CreateFolder.js
 
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export const CreateFolder = async (FolderName, parentId) => {
   try {
@@ -11,13 +12,13 @@ export const CreateFolder = async (FolderName, parentId) => {
 
     if (Response.status === 201) {
       console.log('Data inserted successfully:', Response.data)
-      alert('Data inserted successfully')
+      toast.success('Folder Created Sucessfully')
     } else {
       console.error('Error inserting data:', Response.data.message)
-      alert('Failed to insert data')
+      toast.error('Failed to insert Folder')
     }
   } catch (error) {
     console.error('Unexpected error:', error)
-    alert('Unexpected error occurred')
+    toast.error('Unexpected error occurred')
   }
 }

@@ -4,6 +4,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client'
 import dynamic from 'next/dynamic'
 import { ParentIdProvider } from '@/utils/Context'
 import MainLayout from '@/components/MainLayout'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
   title: 'CLOUD CABINET',
@@ -16,7 +17,10 @@ export default function RootLayout({ children }) {
       <UserProvider>
         <ParentIdProvider>
           <body className="bg-green-200">
-            <MainLayout>{children}</MainLayout>
+            <MainLayout>
+              <Toaster />
+              {children}
+            </MainLayout>
           </body>
         </ParentIdProvider>
       </UserProvider>

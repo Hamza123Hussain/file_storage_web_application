@@ -14,17 +14,17 @@ export const CreateTrash = async (File) => {
 
     if (Response.status === 201) {
       // console.log('Data inserted successfully:', Response.data)
-      alert('Data inserted successfully')
+      // alert('Data inserted successfully')
       const DeleteFile = await deleteFile(File.id)
       if (DeleteFile) {
         alert('FILE GONE')
       }
     } else {
-      console.error('Error inserting data:', Response.data.message)
-      alert('Failed to insert data')
+      // console.error('Error inserting data:', Response.data.message)
+      // alert('Failed to insert data')
     }
   } catch (error) {
     console.error('Unexpected error:', error)
-    alert('Unexpected error occurred')
+    // alert('Unexpected error occurred')
   }
 }

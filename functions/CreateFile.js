@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getFileType } from './FileTypesShort'
+import toast from 'react-hot-toast'
 
 export const CreateFile = async (File, parentId) => {
   try {
@@ -16,13 +17,13 @@ export const CreateFile = async (File, parentId) => {
 
     if (Response.status === 201) {
       console.log('Data inserted successfully:', Response.data)
-      alert('Data inserted successfully')
+      toast.success('File Has Been Created')
     } else {
       console.error('Error inserting data:', Response.data.message)
-      alert('Failed to insert data')
+      toast.error('Failed to insert File')
     }
   } catch (error) {
     console.error('Unexpected error:', error)
-    alert('Unexpected error occurred')
+    toast.error('Unexpected error occurred')
   }
 }
