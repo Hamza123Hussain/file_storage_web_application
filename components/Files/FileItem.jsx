@@ -1,66 +1,64 @@
 import { CreateTrash } from '@/functions/StoreTrash'
-import { Delete, Download } from 'lucide-react'
+import { Delete, Download, Trash } from 'lucide-react'
+import Image from 'next/image'
 import React from 'react'
+import DOC from '../../public/DOC.png'
+import PDF from '../../public/Pdf.png'
+import Images from '../../public/Image.png'
+import Video from '../../public/Video.png'
+import Other from '../../public/Other.png'
 
 const FileItem = ({ File }) => {
   return (
-    <div>
-      <div className="overflow-x-auto border-2 border-slate-100 rounded-lg hover:shadow-md hover:shadow-black">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Created At</th>
-              <th>Size</th>
-              <th>Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr>
-              <td className=" w-5/12 text-[10px]">{File.Name}</td>
-              <td className=" w-4/12">{File.LastModified}</td>
-              <td className=" w-3/12">{File.size} MB</td>
-              <td className=" w-2/12 flex gap-2 ">
-                {' '}
-                <button className=" flex gap-2 items-center p-2 bg-green-400 rounded-lg">
-                  <h3> Download</h3> <Download />
-                </button>
-                <button
-                  onClick={() => {
-                    CreateTrash(File)
-                  }}
-                  className=" flex gap-2  p-2 bg-red-400 rounded-lg"
-                >
-                  <h3>Delete</h3>
-                  <Delete />
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div className="overflow-x-auto border-2 border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
+      <table className="table-auto w-full">
+        <thead>
+          <tr className="bg-gray-200">
+            <th className="p-4 text-left">Name</th>
+            <th className="p-4 text-left">Created At</th>
+            <th className="p-4 text-left">Size</th>
+            <th className="p-4 text-left">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="hover:bg-gray-100">
+            <td className="p-4 flex items-center gap-2">
+              <Image
+                src={
+                  File.type === 'pdf'
+                    ? PDF
+                    : File.type === 'document'
+                    ? DOC
+                    : File.type === 'image'
+                    ? Images
+                    : File.type === 'mp4'
+                    ? Video
+                    : Other
+                }
+                alt={File.type}
+                width={20}
+                height={20}
+              />
+              <h3 className="text-sm">{File.Name}</h3>
+            </td>
+            <td className="p-4 text-sm">{File.LastModified}</td>
+            <td className="p-4 text-sm">{File.size} MB</td>
+            <td className="p-4 flex gap-4 items-center">
+              <button className="text-sm">
+                <Download
+                  className="hover:text-green-500 text-green-900"
+                  size={20}
+                />
+              </button>
+              <button onClick={() => CreateTrash(File)} className="text-sm">
+                <Trash className="hover:text-red-500 text-red-900" size={20} />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
 
 export default FileItem
-/**Name
-: 
-"Hamza Doc"
-created_at
-: 
-"2024-07-09T12:04:15.403806+00:00"
-id
-: 
-"41e7e397-dbcb-4f83-a818-d05c2ada8c9f"
-parentID
-: 
-"78e6dfba-39ac-47cd-82ba-5ec70fbc596f"
-size
-: 
-47579
-type
-: 
-"application/pdf" */

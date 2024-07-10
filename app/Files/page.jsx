@@ -30,7 +30,7 @@ const Files = () => {
     }
 
     fetchData()
-  }, [])
+  }, [FileData])
 
   if (loading)
     return (
