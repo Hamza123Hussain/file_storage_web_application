@@ -3,11 +3,14 @@ export const getFileType = (mimeType) => {
   const mimeTypes = {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
       'document',
-    'image/png': 'png',
+    'image/png': 'image',
     'application/pdf': 'pdf',
     'video/mp4': 'mp4',
-    'image/jpg': 'jpg',
-    'image/jpeg': 'jpeg',
+    'image/jpg': 'image',
+    'image/jpeg': 'image',
+    'application/vnd.ms-powerpoint': 'document',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+      'document',
     // Add more mappings as needed
   }
   return mimeTypes[mimeType] || 'others'
