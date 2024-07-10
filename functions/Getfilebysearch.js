@@ -1,12 +1,12 @@
 import axios from 'axios'
-export const getFileStats = async (type) => {
+export const GetFileSearch = async (searchterm) => {
   try {
-    const response = await axios.get('/api/File/CountFiles', {
-      params: { type },
+    const response = await axios.get('/api/File/SearchFile', {
+      params: { searchterm },
     })
 
     if (response.status === 200) {
-      // console.log('Data fetched:', response.data)
+      //   alert('Data fetched:', response.data)
       //   alert('Data fetched successfully')
       return response.data.data // Assuming response.data is an array of file objects
     } else {
@@ -16,6 +16,5 @@ export const getFileStats = async (type) => {
   } catch (error) {
     console.error('Unexpected error:', error)
     alert('Unexpected error occurred')
-    setError(error.message) // Set error state for UI feedback
   }
 }

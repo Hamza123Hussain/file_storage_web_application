@@ -3,14 +3,16 @@ import { Sidebaritems } from '@/utils/ArrayforSideBar'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import CreateFileBTN from './Files/CreateFile'
 import Folderbtn from './Folder/CreateFolderBtn'
 import Link from 'next/link'
+import { ParentIdContext } from '@/utils/Context'
 
 const SideNav = () => {
   const [activeindex, setindex] = useState(null)
   const { user, error, isLoading } = useUser()
+  const { setSearchState } = useContext(ParentIdContext)
   console.log(user)
   return (
     <div className="flex flex-col h-screen border-2 py-4 sticky top-0 ">
@@ -37,7 +39,10 @@ const SideNav = () => {
           <Link
             href={element.href}
             key={index}
-            onClick={() => setindex(index)}
+            onClick={() => {
+              setindex(index)
+              setSearchState(false)
+            }}
             className={`flex w-48 p-2 items-center gap-2 rounded-lg bg-white hover:bg-blue-400 ${
               index == activeindex ? 'bg-pink-600 text-white' : ''
             }`}

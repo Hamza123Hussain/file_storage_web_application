@@ -13,7 +13,7 @@ export const CreateTrash = async (File) => {
     })
 
     if (Response.status === 201) {
-      console.log('Data inserted successfully:', Response.data)
+      // console.log('Data inserted successfully:', Response.data)
       alert('Data inserted successfully')
       const DeleteFile = await deleteFile(File.id)
       if (DeleteFile) {

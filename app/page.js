@@ -1,8 +1,7 @@
-import Searchbar from '@/components/Searchbar'
-
 import React from 'react'
 import FolderList from './Folders/page'
 import FileList from '@/components/Files/FileList'
+import Searchbar from '@/components/Search/Searchbar'
 
 const page = ({ children }) => {
   return (

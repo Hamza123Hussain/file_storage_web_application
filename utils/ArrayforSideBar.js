@@ -4,7 +4,7 @@ export const Sidebaritems = [
   {
     Name: 'Home',
     Icon: <House />,
-    href: '/DashBoard',
+    href: '/',
   },
   {
     Name: 'My Files',
