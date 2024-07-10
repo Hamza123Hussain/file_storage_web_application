@@ -32,6 +32,9 @@ const DocumentStore = () => {
   if (error) {
     return <div>Error: {error}</div> // Render an error message if there's an issue with API call
   }
+  if (totalSize <= 0) {
+    return <></>
+  }
 
   return (
     <div className="flex flex-col justify-center border-2 rounded-lg p-2 ">

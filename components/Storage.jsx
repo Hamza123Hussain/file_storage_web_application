@@ -18,20 +18,16 @@ const Storage = () => {
 
   useEffect(() => {
     GetfileData()
-  }, [fileStats])
+  }, [])
 
   // Calculate total number of files and their cumulative size using reduce
-  const { totalFiles, totalSize } = fileStats.reduce(
+  const { totalSize } = fileStats.reduce(
     (accumulator, file) => {
-      accumulator.totalFiles++
       accumulator.totalSize += file.size // Assuming each file object in fileStats has a 'size' property
       return accumulator
     },
-    { totalFiles: 0, totalSize: 0 }
+    { totalSize: 0 }
   )
-
-  console.log('Total number of files OVERALL:', totalFiles)
-  console.log('Total size of files OVERALL:', totalSize)
 
   const SizeConsumed = (totalSize / 10000).toFixed(2) * 100
 
