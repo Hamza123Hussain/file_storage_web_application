@@ -29,17 +29,17 @@ export default function MainLayout({ children }) {
     <div className="flex flex-col">
       <Header />
       <div className="flex flex-col sm:flex-row gap-5 p-2 sm:p-0 w-full">
-        <div className="w-full sm:w-2/3">
+        <div className="w-full ">
           {SearchState ? (
             <div className="flex flex-col gap-10 justify-between">
               <Searchbar />
               <Search />
             </div>
           ) : (
-            children
+            <div className=" p-2">{children}</div>
           )}
         </div>
-        <div className="p-5 bg-transparent border-2">
+        <div className="p-2 bg-transparent border-2 w-10/12">
           <Storage />
         </div>
       </div>
