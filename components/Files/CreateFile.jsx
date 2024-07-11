@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { handleUpload } from '@/functions/FileMaker'
+import toast from 'react-hot-toast'
 
 const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
@@ -45,19 +46,24 @@ const CreateFileBTN = () => {
   //   }
   // }
   const handleUploadClick = async () => {
-    if (File.File && File.Name && user) {
-      const result = await handleUpload(
-        File.File,
-        File.Name,
-        File.FileType,
-        user,
-        parentId
-      )
-      if (result.success) {
-        console.log('File uploaded successfully', result.data)
-      } else {
-        console.error('Error uploading file:', result.message)
+    if ((File.File.size / (1024 * 1024)).toFixed(2) < 50) {
+      if (File.File && File.Name && user) {
+        const result = await handleUpload(
+          File.File,
+          File.Name,
+          File.FileType,
+          user,
+          parentId
+        )
+        if (result.success) {
+          console.log('File uploaded successfully', result)
+          Getdata()
+        } else {
+          console.error('Error uploading file:', result.message)
+        }
       }
+    } else {
+      toast.error('File Size is Greater than 50MB')
     }
   }
 

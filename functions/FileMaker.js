@@ -54,7 +54,7 @@ export const handleUpload = async (
         {
           Name: fileName,
           type: fileType,
-          size: file.size,
+          size: (file.size / (1024 * 1024)).toFixed(2),
           CreatedBy: user.email,
           url: publicURL, // Ensure this is set correctly
           parentID: parentId,
