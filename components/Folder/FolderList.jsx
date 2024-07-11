@@ -15,33 +15,45 @@ const FolderList = () => {
 
   const GetFolderData = async () => {
     setLoading(true)
-    const data = await fetchFolderData()
-    setFolderData(data)
+    try {
+      const data = await fetchFolderData()
+      setFolderData(data)
+      setLoading(false)
+    } catch (error) {
+      setError(error.message)
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     GetFolderData()
   }, [])
 
-  if (loading)
+  if (loading) {
     return (
       <div>
         <Loader />
       </div>
     )
-
-  if (folderData.length > 0) {
-    setLoading(false)
   }
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error}</p>
+      </div>
+    )
+  }
+
   return (
     <div className="bg-white mt-4 p-3 rounded-lg ">
-      <div className=" flex justify-between">
-        <h1 className=" text-xl font-extrabold">Recent Folders</h1>
-        <Link href={'/Folders'} className=" hover:text-blue-500 text-blue-300">
+      <div className="flex justify-between">
+        <h1 className="text-xl font-extrabold">Recent Folders</h1>
+        <Link href={'/Folders'} className="hover:text-blue-500 text-blue-300">
           View All
         </Link>
       </div>
-      <div className=" grid grid-cols-1 gap-2  lg:grid-cols-2  ">
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
         {folderData.map((element, index) => (
           <div key={index}>
             <FolderItems Folder={element} ICON={<Folder />} />

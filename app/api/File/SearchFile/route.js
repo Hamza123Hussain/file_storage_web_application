@@ -3,13 +3,13 @@ import { NextResponse } from 'next/server'
 
 export const GET = async (req, res) => {
   try {
-    const url = new URL(req.url, `http://${req.headers.host}`)
-    const searchterm = url.searchParams.get('searchterm')
+    const { searchParams } = new URL(req.url, `http://${req.headers.host}`)
+    const searchterm = searchParams.get('searchterm')
 
     let query = supabase.from('File').select('*')
 
     if (searchterm) {
-      query = query.eq('Name', searchterm)
+      query = query.ilike('Name', `%${searchterm}%`)
     }
 
     const { data, error } = await query

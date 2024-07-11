@@ -1,4 +1,4 @@
-const { GetFile } = require('./GetFile')
+import { GetFile } from './GetFile'
 
 export const fetchData = async () => {
   try {

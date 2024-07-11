@@ -17,6 +17,7 @@ const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
   const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
   const [filecreated, setfilecreated] = useState(false)
+
   const Getdata = async () => {
     setLoading(true)
     const data = await fetchData()
@@ -33,7 +34,6 @@ const CreateFileBTN = () => {
         await CreateFile(File, parentId)
         setfilecreated(true)
       } catch (error) {
-        // Handle error cases
         console.error('Error creating file:', error)
         alert('Failed to create File')
       }
@@ -59,17 +59,18 @@ const CreateFileBTN = () => {
     }
     console.log(File)
   }
+
   useEffect(() => {
     if (filecreated) {
       Getdata()
       setfilecreated(false)
     }
   }, [filecreated])
+
   return (
     <div>
       <Dialog>
-        <DialogTrigger>
-          {' '}
+        <DialogTrigger asChild>
           <button className="w-48 flex gap-2 items-center bg-blue-600 hover:brightness-105 text-white rounded-lg p-3">
             <span className="text-lg">Add A File</span>
             <svg
@@ -78,7 +79,7 @@ const CreateFileBTN = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -91,7 +92,6 @@ const CreateFileBTN = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {' '}
               <h3 className="font-bold text-lg">Add A File</h3>
             </DialogTitle>
             <DialogDescription>

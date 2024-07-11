@@ -2,7 +2,6 @@
 import { CreateFolder } from '@/functions/CreateFolder'
 import { ParentIdContext } from '@/utils/Context'
 import React, { useContext, useEffect, useState } from 'react'
-import FolderList from './FolderList'
 import { fetchFolderData } from '@/functions/Fetchfolderdata'
 import {
   Dialog,
@@ -43,7 +42,7 @@ const Folderbtn = () => {
   return (
     <div>
       <Dialog>
-        <DialogTrigger>
+        <DialogTrigger asChild>
           <button className="w-48 flex gap-2 items-center bg-green-600 hover:brightness-105 text-white rounded-lg p-3">
             <span className="text-lg">Add A Folder</span>
             <svg
