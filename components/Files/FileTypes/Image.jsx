@@ -4,12 +4,13 @@ import axios from 'axios'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import Logo from '../../../public/Image.png'
+import { useUser } from '@auth0/nextjs-auth0/client'
 const ImageStorage = () => {
+  const { user } = useUser()
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
-  const [error, setError] = useState(null)
 
   const GetfileData = async () => {
-    const data = await getFileStats('image')
+    const data = await getFileStats('image', user?.email)
     setFileStats(data)
   }
 
@@ -27,12 +28,6 @@ const ImageStorage = () => {
     { totalFiles: 0, totalSize: 0 }
   )
 
-  // console.log('Total number of files:', totalFiles)
-  // console.log('Total size of files:', totalSize)
-
-  if (error) {
-    return <div>Error: {error}</div> // Render an error message if there's an issue with API call
-  }
   if (totalSize <= 0) {
     return <></>
   }

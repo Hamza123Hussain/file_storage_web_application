@@ -5,12 +5,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import Logo from '../../../public/DOC.png'
 import { ParentIdContext } from '@/utils/Context'
 import Loader from '@/components/Loader'
+import { useUser } from '@auth0/nextjs-auth0/client'
 const DocumentStore = () => {
+  const { user } = useUser()
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
 
   const GetfileData = async () => {
-    const data = await getFileStats('document')
+    const data = await getFileStats('document', user?.email)
     setFileStats(data)
   }
 

@@ -8,15 +8,16 @@ import Other from './Files/FileTypes/Other'
 import { GetFiles } from '@/functions/GetFiles'
 import { ParentIdContext } from '@/utils/Context'
 import Loader from './Loader'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 const Storage = () => {
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
   const { loading, setLoading } = useContext(ParentIdContext)
-
+  const { user } = useUser()
   const GetfileData = async () => {
     setLoading(true)
-    const data = await GetFiles()
+    const data = await GetFiles(user?.email)
     setFileStats(data)
     setLoading(false)
   }
@@ -38,10 +39,6 @@ const Storage = () => {
   if (loading) {
     return (
       <div className=" flex flex-col justify-center items-center">
-        <Loader />
-        <Loader />
-        <Loader />
-        <Loader />
         <Loader />
       </div>
     )

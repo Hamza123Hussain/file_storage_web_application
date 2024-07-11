@@ -4,12 +4,14 @@ import axios from 'axios'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import Logo from '../../../public/Video.png'
+import { useUser } from '@auth0/nextjs-auth0/client'
 const VideoStore = () => {
+  const { user } = useUser()
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
 
   const GetfileData = async () => {
-    const data = await getFileStats('mp4')
+    const data = await getFileStats('mp4', user?.email)
     setFileStats(data)
   }
 

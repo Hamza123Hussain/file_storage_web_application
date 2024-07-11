@@ -1,15 +1,20 @@
 import { supabase } from '../../../../utils/Supabaseconfig'
 import { NextResponse } from 'next/server'
 
-export const GET = async (req, res) => {
+export const GET = async (req) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host}`)
     const type = url.searchParams.get('type')
+    const email = url.searchParams.get('email')
 
     let query = supabase.from('File').select('*')
 
     if (type) {
       query = query.eq('type', type)
+    }
+
+    if (email) {
+      query = query.eq('CreatedBy', email)
     }
 
     const { data, error } = await query

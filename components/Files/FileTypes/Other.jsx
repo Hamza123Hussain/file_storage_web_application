@@ -3,12 +3,14 @@ import { getFileStats } from '@/functions/GetFilesByType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import Logo from '../../../public/Other.png'
+import { useUser } from '@auth0/nextjs-auth0/client'
 const Other = () => {
+  const { user } = useUser()
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
 
   const GetfileData = async () => {
-    const data = await getFileStats('others')
+    const data = await getFileStats('others', user?.email)
     setFileStats(data)
   }
 
