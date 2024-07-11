@@ -15,8 +15,8 @@ const Header = () => {
   const { setSearchState } = useContext(ParentIdContext)
 
   return (
-    <header className="p-4 bg-white shadow-md w-full flex flex-col gap-5 sm:gap-2">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-5 ">
+    <header className="p-2 bg-white shadow-md w-full flex flex-col  sm:gap-2 gap-3">
+      <div className="flex flex-col sm:flex-row items-center justify-between ">
         <div className="flex items-center mb-4 sm:mb-0">
           <Image
             src={'/cloud_cabinet_logo_green_blue-removebg-preview.png'}
@@ -44,10 +44,16 @@ const Header = () => {
                 }`}
               >
                 {element.Icon}
-                <span className="hidden sm:inline">{element.Name}</span>
+                <span className=" text-xs sm:inline">{element.Name}</span>
               </Link>
             ))}
           </nav>
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row  justify-between items-center gap-4 mb-4 sm:mb-0">
+        <div className="flex flex-col sm:flex-row  justify-start items-center gap-4 mb-4 sm:mb-0">
+          <CreateFileBTN />
+          <Folderbtn />
         </div>
         <div className="flex items-center gap-2">
           <h2 className="font-bold text-xl">{user?.name}</h2>
@@ -55,10 +61,6 @@ const Header = () => {
             <LogOut />
           </a>
         </div>
-      </div>
-      <div className="flex flex-col sm:flex-row  justify-start items-center gap-4 mb-4 sm:mb-0">
-        <CreateFileBTN />
-        <Folderbtn />
       </div>
     </header>
   )
