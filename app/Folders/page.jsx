@@ -35,7 +35,14 @@ const FolderList = () => {
       </div>
     )
 
-  // if (folderData.length > 1) console.log('Folder data:', folderData)
+  if (folderData.length == 0) {
+    return (
+      <div className=" border-2 border-slate-700 p-10 flex mt-20 justify-center items-center">
+        {' '}
+        <h1>NO FOLDERS STORED</h1>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-white mt-4 p-3 rounded-lg ">

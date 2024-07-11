@@ -31,7 +31,14 @@ const FileList = () => {
       </div>
     )
 
-  // if (FileData.length > 1) console.log('File data:', FileData)
+  if (FileData.length == 0) {
+    return (
+      <div className=" border-2 border-slate-700 p-10 flex mt-20 justify-center items-center">
+        {' '}
+        <h1>NO FILES STORED</h1>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-white mt-4 p-3 rounded-lg ">

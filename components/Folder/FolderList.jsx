@@ -37,11 +37,11 @@ const FolderList = () => {
       </div>
     )
   }
-
-  if (error) {
+  if (folderData.length == 0) {
     return (
-      <div>
-        <p>Error: {error}</p>
+      <div className=" border-2 border-slate-700 p-10 flex mt-20 justify-center items-center">
+        {' '}
+        <h1>NO FOLDERS STORED</h1>
       </div>
     )
   }

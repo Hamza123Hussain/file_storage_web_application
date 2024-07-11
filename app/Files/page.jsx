@@ -28,7 +28,7 @@ const Files = () => {
     if (Email) {
       fetchData()
     }
-  }, [Email, setFileData, setLoading])
+  }, [])
 
   if (loading)
     return (
@@ -36,7 +36,14 @@ const Files = () => {
         <Loader />
       </div>
     )
-
+  if (FileData.length == 0) {
+    return (
+      <div className=" border-2 border-slate-700 p-10 flex mt-20 justify-center items-center">
+        {' '}
+        <h1>NO FILES STORED</h1>
+      </div>
+    )
+  }
   return (
     <div className="bg-white mt-4 p-3 rounded-lg">
       <h1 className="text-xl font-extrabold">All Files</h1>
