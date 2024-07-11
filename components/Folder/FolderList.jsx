@@ -1,30 +1,27 @@
 'use client'
 import { Folder } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import FolderItems from './FolderItems'
-import { GetFolder } from '@/functions/GetFolder'
 import Loader from '../Loader'
 import Link from 'next/link'
+import { ParentIdContext } from '@/utils/Context'
+import { fetchFolderData } from '@/functions/Fetchfolderdata'
 
 const FolderList = () => {
-  const [folderData, setFolderData] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { folderData, setFolderData, loading, setLoading } =
+    useContext(ParentIdContext)
+
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await GetFolder()
-        setFolderData(data.data)
-      } catch (error) {
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
-    }
+  const GetFolderData = async () => {
+    setLoading(true)
+    const data = await fetchFolderData()
+    setFolderData(data)
+  }
 
-    fetchData()
-  }, [folderData])
+  useEffect(() => {
+    GetFolderData()
+  }, [])
 
   if (loading)
     return (
@@ -33,8 +30,9 @@ const FolderList = () => {
       </div>
     )
 
-  // if (folderData.length > 1) console.log('Folder data:', folderData)
-
+  if (folderData.length > 0) {
+    setLoading(false)
+  }
   return (
     <div className="bg-white mt-4 p-3 rounded-lg ">
       <div className=" flex justify-between">

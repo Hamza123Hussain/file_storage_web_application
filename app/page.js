@@ -1,7 +1,8 @@
 import React from 'react'
-import FolderList from './Folders/page'
+
 import FileList from '@/components/Files/FileList'
 import Searchbar from '@/components/Search/Searchbar'
+import FolderList from '@/components/Folder/FolderList'
 
 const page = ({ children }) => {
   return (
