@@ -9,10 +9,12 @@ import Images from '../../public/Image.png'
 import Video from '../../public/Video.png'
 import Other from '../../public/Other.png'
 import { useRouter } from 'next/navigation'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 const FileItem = ({ File }) => {
+  const { user } = useUser()
   const RemoveFile = () => {
-    CreateTrash(File)
+    CreateTrash(File, user?.email)
   }
 
   return (

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { deleteFile } from './DeleteFromFIle'
 
-export const CreateTrash = async (File) => {
+export const CreateTrash = async (File, Email) => {
   console.log('Trash details', File.Name)
   try {
     const Response = await axios.post('/api/Trash/CreateTrash', {
@@ -10,6 +10,7 @@ export const CreateTrash = async (File) => {
       type: File?.type,
       size: File?.size, // Keep size in MB
       ParentID: File?.parentId,
+      CreatedBy: Email,
     })
 
     if (Response.status === 201) {

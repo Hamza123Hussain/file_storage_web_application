@@ -2,18 +2,20 @@
 import React, { useEffect, useState } from 'react'
 
 import Loader from '@/components/Loader'
-import { CreateTrash } from '@/functions/StoreTrash'
+
 import TrashItem from '@/components/TrashItems'
 import { GetTrash } from '@/functions/GetTrash'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 const Trash = () => {
   const [trashData, settrashData] = useState([])
   const [loading, setLoading] = useState(true)
+  const { user } = useUser()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await GetTrash()
+        const data = await GetTrash(user?.email)
         settrashData(data.data)
       } catch (error) {
         console.log(error.message)

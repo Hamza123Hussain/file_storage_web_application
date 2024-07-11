@@ -1,9 +1,14 @@
 import { supabase } from '../../../../utils/Supabaseconfig'
 import { NextResponse } from 'next/server'
 
-export const GET = async () => {
+export const GET = async (req) => {
   try {
-    const { data, error } = await supabase.from('Trash').select('*')
+    const { searchParams } = new URL(req.url, `http://${req.headers.host}`)
+    const Email = searchParams.get('Email')
+    const { data, error } = await supabase
+      .from('Trash')
+      .select('*')
+      .eq('CreatedBy', Email)
     if (error) {
       console.error('Error fetching data from Supabase:', error.message)
       return NextResponse.json({ message: error.message }, { status: 500 })
