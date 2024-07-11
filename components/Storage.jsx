@@ -1,19 +1,24 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ImageStorage from './Files/FileTypes/Image'
 import VideoStore from './Files/FileTypes/Video'
 import DocumentStore from './Files/FileTypes/Document'
 import PDF from './Files/FileTypes/Pdf'
 import Other from './Files/FileTypes/Other'
 import { GetFiles } from '@/functions/GetFiles'
+import { ParentIdContext } from '@/utils/Context'
+import Loader from './Loader'
 
 const Storage = () => {
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
+  const { loading, setLoading } = useContext(ParentIdContext)
 
   const GetfileData = async () => {
+    setLoading(true)
     const data = await GetFiles()
     setFileStats(data)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -30,11 +35,17 @@ const Storage = () => {
   )
 
   const SizeConsumed = (totalSize / 10000).toFixed(2) * 100
-
-  if (error) {
-    return <div>Error: {error}</div> // Render an error message if there's an issue with API call
+  if (loading) {
+    return (
+      <div className=" flex flex-col justify-center items-center">
+        <Loader />
+        <Loader />
+        <Loader />
+        <Loader />
+        <Loader />
+      </div>
+    )
   }
-
   return (
     <div className="flex flex-col gap-2 ">
       <h1 className=" text-lg font-bold">Storage Details</h1>

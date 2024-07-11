@@ -8,6 +8,7 @@ import { useContext } from 'react'
 import { ParentIdContext } from '@/utils/Context'
 import Searchbar from './Search/Searchbar'
 import Search from './Search/Search'
+import { Sheet } from './ui/sheet'
 
 export default function MainLayout({ children }) {
   const { user, isLoading } = useUser()
@@ -28,15 +29,15 @@ export default function MainLayout({ children }) {
 
   // If the user is logged in, render the SideNav, Storage, and children
   return (
-    <div className="gap-5 flex">
+    <div className="gap-5 flex flex-col sm:flex-row">
       {' '}
-      <div className=" flex">
+      <div className=" flex justify-start p-2">
         <SideNav />
       </div>
       <div className="grid grid-cols-1 p-2 sm:p-0 md:grid-cols-3 w-full gap-3">
         <div className="col-span-2">
           {SearchState ? (
-            <div className=" flex flex-col gap-10 mt-5 justify-between">
+            <div className=" flex flex-col gap-10  justify-between">
               <Searchbar />
               <Search />
             </div>

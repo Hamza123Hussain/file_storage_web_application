@@ -1,8 +1,10 @@
 'use client'
 import { getFileStats } from '@/functions/GetFilesByType'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Logo from '../../../public/DOC.png'
+import { ParentIdContext } from '@/utils/Context'
+import Loader from '@/components/Loader'
 const DocumentStore = () => {
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
