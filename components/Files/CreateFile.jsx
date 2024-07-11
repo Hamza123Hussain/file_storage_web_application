@@ -55,6 +55,7 @@ const CreateFileBTN = () => {
     if (filecreated) {
       Getdata()
       setfilecreated(false)
+      window.location.reload()
     }
   }, [filecreated])
   return (

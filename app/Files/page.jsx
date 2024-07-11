@@ -1,36 +1,30 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Loader from '@/components/Loader'
 import FileItem from '@/components/Files/FileItem'
 import { GetFiles } from '@/functions/GetFiles'
-// const DemoFileArray = [
-//   { Name: 'HAMZA.PNG', Type: 'PDF', CreatedAt: '2021-21-2', FileSize: '12MB' },
-//   { Name: 'HAMZA.PNG', Type: 'DOC', CreatedAt: '2021-21-2', FileSize: '12MB' },
-//   { Name: 'HAMZA.PNG', Type: 'PNG', CreatedAt: '2021-21-2', FileSize: '12MB' },
-//   { Name: 'HAMZA.PNG', Type: 'JPEG', CreatedAt: '2021-21-2', FileSize: '12MB' },
-//   { Name: 'HAMZA.PNG', Type: 'PDF', CreatedAt: '2021-21-2', FileSize: '12MB' },
-// ]
+import { ParentIdContext } from '@/utils/Context'
 
 const Files = () => {
-  const [FileData, setFileData] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const { FileData, setFileData, loading, setLoading } =
+    useContext(ParentIdContext)
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
         const data = await GetFiles()
         setFileData(data)
+        setLoading(false)
       } catch (error) {
-        setError(error.message)
-      } finally {
+        console.log(error)
         setLoading(false)
       }
     }
 
     fetchData()
-  }, [FileData])
+  }, [])
 
   if (loading)
     return (

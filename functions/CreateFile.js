@@ -18,6 +18,7 @@ export const CreateFile = async (File, parentId) => {
     if (Response.status === 201) {
       console.log('Data inserted successfully:', Response.data)
       toast.success('File Has Been Created')
+      window.location.reload()
     } else {
       console.error('Error inserting data:', Response.data.message)
       toast.error('Failed to insert File')

@@ -15,8 +15,10 @@ export const CreateTrash = async (File) => {
     if (Response.status === 201) {
       // console.log('Data inserted successfully:', Response.data)
       // alert('Data inserted successfully')
-      const DeleteFile = await deleteFile(File.id)
-      if (DeleteFile) {
+      const isDeleted = await deleteFile(File.id)
+      if (isDeleted) {
+        console.log('FILE GONE')
+        window.location.reload() // Reload the page after successful operation
       }
     } else {
       // console.error('Error inserting data:', Response.data.message)

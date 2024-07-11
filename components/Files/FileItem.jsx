@@ -1,3 +1,4 @@
+'use client'
 import { CreateTrash } from '@/functions/StoreTrash'
 import { Delete, Download, Trash } from 'lucide-react'
 import Image from 'next/image'
@@ -7,8 +8,14 @@ import PDF from '../../public/Pdf.png'
 import Images from '../../public/Image.png'
 import Video from '../../public/Video.png'
 import Other from '../../public/Other.png'
+import { useRouter } from 'next/navigation'
 
 const FileItem = ({ File }) => {
+  const Router = useRouter()
+  const RemoveFile = () => {
+    CreateTrash(File)
+    Router.refresh()
+  }
   return (
     <div className="overflow-x-auto border-2 border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
       <table className="table-auto w-full">
@@ -50,7 +57,7 @@ const FileItem = ({ File }) => {
                   size={20}
                 />
               </button>
-              <button onClick={() => CreateTrash(File)} className="text-sm">
+              <button onClick={RemoveFile} className="text-sm">
                 <Trash className="hover:text-red-500 text-red-900" size={20} />
               </button>
             </td>
