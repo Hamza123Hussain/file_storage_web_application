@@ -5,6 +5,7 @@ import FileItem from '@/components/Files/FileItem'
 import { GetFiles } from '@/functions/GetFiles'
 import { ParentIdContext } from '@/utils/Context'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import CreateFileBTN from '@/components/Files/CreateFile'
 
 const Files = () => {
   const { user } = useUser()
@@ -38,9 +39,10 @@ const Files = () => {
     )
   if (FileData.length == 0) {
     return (
-      <div className=" border-2 border-slate-700 p-10 flex mt-20 justify-center items-center">
+      <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
         {' '}
-        <h1>NO FILES STORED</h1>
+        <h1 className=" font-bold text-lg sm:text-xl">NO FILES STORED</h1>
+        <CreateFileBTN />
       </div>
     )
   }

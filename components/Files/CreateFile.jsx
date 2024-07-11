@@ -73,7 +73,7 @@ const CreateFileBTN = () => {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <button className="w-48 flex gap-2 items-center bg-blue-600 hover:brightness-105 text-white rounded-lg p-3">
+          <button className="w-48 flex gap-2 items-center justify-center bg-blue-600 hover:brightness-105 text-white rounded-lg p-3">
             <span className="text-lg">Add A File</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"

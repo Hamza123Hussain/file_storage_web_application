@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { ParentIdContext } from '@/utils/Context'
 import { fetchFolderData } from '@/functions/Fetchfolderdata'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Folderbtn from './CreateFolderBtn'
 
 const FolderList = () => {
   const { folderData, setFolderData, loading, setLoading } =
@@ -39,9 +40,10 @@ const FolderList = () => {
   }
   if (folderData.length == 0) {
     return (
-      <div className=" border-2 border-slate-700 p-10 flex mt-20 justify-center items-center">
+      <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
         {' '}
-        <h1>NO FOLDERS STORED</h1>
+        <h1 className=" font-bold text-lg sm:text-xl">NO FOLDERS STORED</h1>
+        <Folderbtn />
       </div>
     )
   }
