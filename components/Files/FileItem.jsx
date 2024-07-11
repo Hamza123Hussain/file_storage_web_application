@@ -11,25 +11,24 @@ import Other from '../../public/Other.png'
 import { useRouter } from 'next/navigation'
 
 const FileItem = ({ File }) => {
-  const Router = useRouter()
   const RemoveFile = () => {
     CreateTrash(File)
-    Router.refresh()
   }
+
   return (
-    <div className="overflow-x-auto border-2 border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
+    <div className="overflow-x-auto border-2 w-full border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
       <table className="table-auto w-full">
         <thead>
           <tr className="bg-gray-200">
-            <th className="p-4 text-left">Name</th>
-            <th className="p-4 text-left">Created At</th>
-            <th className="p-4 text-left">Size</th>
-            <th className="p-4 text-left">Options</th>
+            <th className="p-4 text-left w-1/4">Name</th>
+            <th className="p-4 text-left w-1/4">Created At</th>
+            <th className="p-4 text-left w-1/4">Size</th>
+            <th className="p-4 text-left w-1/4">Options</th>
           </tr>
         </thead>
         <tbody>
           <tr className="hover:bg-gray-100">
-            <td className="p-4 flex items-center gap-2">
+            <td className="p-4 flex items-center gap-2 w-1/4">
               <Image
                 src={
                   File.type === 'pdf'
@@ -48,9 +47,9 @@ const FileItem = ({ File }) => {
               />
               <h3 className="text-sm">{File.Name}</h3>
             </td>
-            <td className="p-4 text-sm">{File.LastModified}</td>
-            <td className="p-4 text-sm">{File.size} MB</td>
-            <td className="p-4 flex gap-4 items-center">
+            <td className="p-4 text-sm w-1/4">{File.LastModified}</td>
+            <td className="p-4 text-sm w-1/4">{File.size} MB</td>
+            <td className="p-4 flex gap-4 items-center w-1/4">
               <button className="text-sm">
                 <Download
                   className="hover:text-green-500 text-green-900"

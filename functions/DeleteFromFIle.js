@@ -10,6 +10,7 @@ export const deleteFile = async (id) => {
   })
   if (response.ok) {
     toast.success('File Moved To Trash')
+    window.location.reload()
   }
 
   const result = await response.json()
