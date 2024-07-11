@@ -14,5 +14,4 @@ export const deleteFile = async (id) => {
 
   const result = await response.json()
   console.log(result)
-  t
 }
