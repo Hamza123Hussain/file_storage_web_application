@@ -10,6 +10,8 @@ export const ParentIdProvider = ({ children }) => {
   const [searchData, setsearchdata] = useState([])
   const [loading, setLoading] = useState(false)
   const [FileData, setFileData] = useState([])
+
+  const [fileStats, setFileStats] = useState(0) // Initialize as empty array
   const [folderData, setFolderData] = useState([])
   return (
     <ParentIdContext.Provider
@@ -25,6 +27,8 @@ export const ParentIdProvider = ({ children }) => {
         FileData,
         setFileData,
         folderData,
+        fileStats,
+        setFileStats,
         setFolderData,
       }}
     >

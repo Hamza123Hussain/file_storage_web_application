@@ -13,16 +13,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { handleUpload } from '@/functions/FileMaker'
 
 const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
   const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
-  const [filecreated, setfilecreated] = useState(false)
   const { user } = useUser()
-  const Email = user?.email
+  const [filecreated, setfilecreated] = useState(false)
   const Getdata = async () => {
     setLoading(true)
-    const data = await fetchData(Email)
+    const data = await fetchData(user?.email)
     if (data) {
       console.log('DATA FETCHED', data)
       setFileData(data)
@@ -30,17 +30,34 @@ const CreateFileBTN = () => {
     }
   }
 
-  const AddFileTOSupabase = async () => {
-    if ((File.File.size / (1024 * 1024)).toFixed(2) < 1000) {
-      try {
-        await CreateFile(File, parentId, Email)
-        setfilecreated(true)
-      } catch (error) {
-        console.error('Error creating file:', error)
-        alert('Failed to create File')
+  // const AddFileTOSupabase = async () => {
+  //   if ((File.File.size / (1024 * 1024)).toFixed(2) < 1000) {
+  //     try {
+  //       await CreateFile(File, parentId)
+  //       setfilecreated(true)
+  //     } catch (error) {
+  //       // Handle error cases
+  //       console.error('Error creating file:', error)
+  //       alert('Failed to create File')
+  //     }
+  //   } else {
+  //     alert('FILE IS LARGER THAN 1 GB')
+  //   }
+  // }
+  const handleUploadClick = async () => {
+    if (File.File && File.Name && user) {
+      const result = await handleUpload(
+        File.File,
+        File.Name,
+        File.FileType,
+        user,
+        parentId
+      )
+      if (result.success) {
+        console.log('File uploaded successfully', result.data)
+      } else {
+        console.error('Error uploading file:', result.message)
       }
-    } else {
-      alert('FILE IS LARGER THAN 1 GB')
     }
   }
 
@@ -61,19 +78,18 @@ const CreateFileBTN = () => {
     }
     console.log(File)
   }
-
   useEffect(() => {
     if (filecreated) {
       Getdata()
       setfilecreated(false)
     }
   }, [filecreated])
-
   return (
     <div>
       <Dialog>
-        <DialogTrigger asChild>
-          <button className="w-48 flex gap-2 items-center justify-center bg-blue-600 hover:brightness-105 text-white rounded-lg p-3">
+        <DialogTrigger>
+          {' '}
+          <button className="w-48 flex gap-2 items-center bg-blue-600 hover:brightness-105 text-white rounded-lg p-3">
             <span className="text-lg">Add A File</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +97,7 @@ const CreateFileBTN = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="size-6"
             >
               <path
                 strokeLinecap="round"
@@ -94,6 +110,7 @@ const CreateFileBTN = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
+              {' '}
               <h3 className="font-bold text-lg">Add A File</h3>
             </DialogTitle>
             <DialogDescription>
@@ -135,7 +152,7 @@ const CreateFileBTN = () => {
                 </div>
                 <div className="flex justify-end mt-2">
                   <button
-                    onClick={AddFileTOSupabase}
+                    onClick={handleUploadClick}
                     className="px-3 py-1 hover:brightness-105 text-white bg-green-400 rounded-lg"
                   >
                     Save

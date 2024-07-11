@@ -2,19 +2,41 @@
 import { CreateTrash } from '@/functions/StoreTrash'
 import { Delete, Download, Trash } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useContext } from 'react'
 import DOC from '../../public/DOC.png'
 import PDF from '../../public/Pdf.png'
 import Images from '../../public/Image.png'
 import Video from '../../public/Video.png'
 import Other from '../../public/Other.png'
-import { useRouter } from 'next/navigation'
+
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { fetchData } from '@/functions/FetchDataFiles'
+import { ParentIdContext } from '@/utils/Context'
 
 const FileItem = ({ File }) => {
+  const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
   const { user } = useUser()
-  const RemoveFile = () => {
-    CreateTrash(File, user?.email)
+  const Getdata = async () => {
+    setLoading(true)
+    const data = await fetchData(user?.email)
+    if (data) {
+      console.log('DATA FETCHED', data)
+      setFileData(data)
+      setLoading(false)
+    }
+  }
+
+  const RemoveFile = async () => {
+    const Email = user?.email
+    if (!Email) {
+      console.error('User email is not available')
+      return
+    }
+
+    const isSuccess = await CreateTrash(File, Email)
+    if (isSuccess) {
+      Getdata()
+    }
   }
 
   return (

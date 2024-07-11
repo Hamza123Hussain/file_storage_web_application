@@ -51,9 +51,9 @@ const Storage = () => {
       <h1 className=" text-lg font-bold">Storage Details</h1>
       <div className=" flex flex-col">
         <h1 className=" font-bold">
-          {(totalSize / 1024).toFixed(2)} GB OUT OF 10 GB
+          {/* {(totalSize / 1024).toFixed(2)} GB OUT OF 10 GB */}
         </h1>
-        <div className=" border-2 h-fit ">
+        {/* <div className=" border-2 h-fit ">
           {' '}
           <div
             style={{ width: `${SizeConsumed}%` }}
@@ -67,7 +67,7 @@ const Storage = () => {
           >
             {SizeConsumed}%
           </div>{' '}
-        </div>
+        </div> */}
       </div>
       <div className=" flex flex-col gap-2 ">
         <ImageStorage />

@@ -25,7 +25,7 @@ const Trash = () => {
     }
 
     fetchData()
-  }, [trashData])
+  }, [])
 
   if (loading)
     return (
