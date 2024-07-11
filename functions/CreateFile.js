@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getFileType } from './FileTypesShort'
 import toast from 'react-hot-toast'
 
-export const CreateFile = async (File, parentId) => {
+export const CreateFile = async (File, parentId, Email) => {
   try {
     const FileType = getFileType(File?.File.type)
     const lastModifiedDate = new Date(File?.File.lastModified).toISOString() // Convert to ISO string
@@ -13,6 +13,7 @@ export const CreateFile = async (File, parentId) => {
       type: FileType,
       size: (File?.File.size / (1024 * 1024)).toFixed(2), // Keep size in MB
       ParentID: parentId,
+      CreatedBy: Email,
     })
 
     if (Response.status === 201) {

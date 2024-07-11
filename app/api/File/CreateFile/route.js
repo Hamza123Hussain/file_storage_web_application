@@ -12,6 +12,7 @@ export const POST = async (req) => {
         type: payload?.type,
         size: payload?.size,
         parentID: payload?.ParentID,
+        CreatedBy: payload?.CreatedBy,
       },
     ])
     if (error) {

@@ -11,15 +11,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 const Folderbtn = () => {
+  const { user } = useUser()
   const { setFolderData, parentId } = useContext(ParentIdContext)
   const [foldername, setname] = useState('')
   const [FolderCreated, setCreated] = useState(false)
 
   const handleCreateFolder = async () => {
     try {
-      await CreateFolder(foldername, parentId)
+      await CreateFolder(foldername, parentId, user?.email)
       setCreated(true)
     } catch (error) {
       console.error('Error creating folder:', error)

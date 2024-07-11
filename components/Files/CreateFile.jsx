@@ -12,15 +12,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
   const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
   const [filecreated, setfilecreated] = useState(false)
-
+  const { user } = useUser()
+  const Email = user?.email
   const Getdata = async () => {
     setLoading(true)
-    const data = await fetchData()
+    const data = await fetchData(Email)
     if (data) {
       console.log('DATA FETCHED', data)
       setFileData(data)
@@ -31,7 +33,7 @@ const CreateFileBTN = () => {
   const AddFileTOSupabase = async () => {
     if ((File.File.size / (1024 * 1024)).toFixed(2) < 1000) {
       try {
-        await CreateFile(File, parentId)
+        await CreateFile(File, parentId, Email)
         setfilecreated(true)
       } catch (error) {
         console.error('Error creating file:', error)

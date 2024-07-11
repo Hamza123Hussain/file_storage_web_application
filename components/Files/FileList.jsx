@@ -4,13 +4,15 @@ import FileItem from './FileItem'
 import Loader from '../Loader'
 import { ParentIdContext } from '@/utils/Context'
 import { fetchData } from '@/functions/FetchDataFiles'
+import { useUser } from '@auth0/nextjs-auth0/client'
 const FileList = () => {
   const { FileData, setFileData, loading, setLoading } =
     useContext(ParentIdContext)
-
+  const { user } = useUser()
+  const Email = user?.email
   const Getdata = async () => {
     setLoading(true)
-    const data = await fetchData()
+    const data = await fetchData(Email)
     if (data) {
       console.log('DATA FETCHED', data)
       setFileData(data)

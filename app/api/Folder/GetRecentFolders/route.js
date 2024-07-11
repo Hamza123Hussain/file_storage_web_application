@@ -1,11 +1,14 @@
 import { supabase } from '../../../../utils/Supabaseconfig'
 import { NextResponse } from 'next/server'
 
-export const GET = async () => {
+export const GET = async (req) => {
   try {
+    const { searchParams } = new URL(req.url, `http://${req.headers.host}`)
+    const Email = searchParams.get('Email')
     const { data, error } = await supabase
       .from('Folder')
       .select('*')
+      .eq('CreatedBy', Email)
       .order('created_at', { ascending: false })
       .limit(3)
     if (error) {

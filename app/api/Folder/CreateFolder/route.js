@@ -7,6 +7,7 @@ export const POST = async (req) => {
       {
         FolderName: payload?.Name,
         parentID: payload?.ParentID,
+        CreatedBy: payload?.CreatedBy,
       },
     ])
     if (error) {

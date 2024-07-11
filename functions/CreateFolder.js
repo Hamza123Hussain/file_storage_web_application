@@ -3,11 +3,12 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
-export const CreateFolder = async (FolderName, parentId) => {
+export const CreateFolder = async (FolderName, parentId, Email) => {
   try {
     const Response = await axios.post('/api/Folder/CreateFolder', {
       Name: FolderName,
       ParentID: parentId,
+      CreatedBy: Email,
     })
 
     if (Response.status === 201) {

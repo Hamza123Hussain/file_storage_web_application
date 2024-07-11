@@ -6,17 +6,18 @@ import Loader from '../Loader'
 import Link from 'next/link'
 import { ParentIdContext } from '@/utils/Context'
 import { fetchFolderData } from '@/functions/Fetchfolderdata'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 const FolderList = () => {
   const { folderData, setFolderData, loading, setLoading } =
     useContext(ParentIdContext)
 
   const [error, setError] = useState(null)
-
+  const { user } = useUser()
   const GetFolderData = async () => {
     setLoading(true)
     try {
-      const data = await fetchFolderData()
+      const data = await fetchFolderData(user?.email)
       setFolderData(data)
       setLoading(false)
     } catch (error) {

@@ -5,8 +5,10 @@ import React, { useEffect, useState } from 'react'
 import { GetFolders } from '@/functions/GetFolders'
 import FolderItems from '@/components/Folder/FolderItems'
 import Loader from '@/components/Loader'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 const FolderList = () => {
+  const { user } = useUser()
   const [folderData, setFolderData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -14,7 +16,7 @@ const FolderList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await GetFolders()
+        const data = await GetFolders(user?.email)
         setFolderData(data.data)
       } catch (error) {
         setError(error.message)
