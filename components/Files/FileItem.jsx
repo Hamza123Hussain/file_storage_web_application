@@ -55,7 +55,7 @@ const FileItem = ({ File }) => {
         </thead>
         <tbody>
           <tr className="hover:bg-gray-100">
-            <td className="p-4 flex items-center gap-2 w-1/4">
+            <td className="p-4 flex items-center gap-2 w-2/4">
               <Image
                 src={
                   File.type === 'pdf'
@@ -69,10 +69,10 @@ const FileItem = ({ File }) => {
                     : Other
                 }
                 alt={File.type}
-                width={20}
-                height={20}
+                width={30}
+                height={30}
               />
-              <h3 className="text-sm">{File.Name}</h3>
+              <h3 className="text-xs">{File.Name}</h3>
             </td>
             <td className="p-4 text-sm w-1/4">{File.LastModified}</td>
             <td className="p-4 text-sm w-1/4">{File.size} MB</td>

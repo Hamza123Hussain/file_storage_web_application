@@ -10,6 +10,7 @@ export const handleUpload = async (
   parentId
 ) => {
   try {
+    const lastModifiedDate = new Date(file?.lastModified).toISOString()
     // Create a unique file name
     const fileId = uuidv4()
     const filePath = `${fileId}-${file.name}`
@@ -57,6 +58,7 @@ export const handleUpload = async (
           size: (file.size / (1024 * 1024)).toFixed(2),
           CreatedBy: user.email,
           url: publicURL, // Ensure this is set correctly
+          LastModified: lastModifiedDate,
           parentID: parentId,
         },
       ])
