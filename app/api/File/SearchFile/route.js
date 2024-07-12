@@ -5,11 +5,15 @@ export const GET = async (req, res) => {
   try {
     const { searchParams } = new URL(req.url, `http://${req.headers.host}`)
     const searchterm = searchParams.get('searchterm')
+    const Email = searchParams.get('Email')
 
     let query = supabase.from('File').select('*')
 
     if (searchterm) {
       query = query.ilike('Name', `%${searchterm}%`)
+    }
+    if (Email) {
+      query = query.eq('CreatedBy', Email)
     }
 
     const { data, error } = await query

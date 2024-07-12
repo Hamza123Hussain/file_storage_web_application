@@ -2,6 +2,7 @@
 
 import { GetFileSearch } from '@/functions/Getfilebysearch'
 import { ParentIdContext } from '@/utils/Context'
+import { useUser } from '@auth0/nextjs-auth0/client'
 import { Search } from 'lucide-react'
 import React, { useContext, useState } from 'react'
 
@@ -9,11 +10,11 @@ const Searchbar = () => {
   const { setSearchState, setsearchdata, setLoading } =
     useContext(ParentIdContext)
   const [searchterm, setsearch] = useState('')
-
+  const { user } = useUser()
   const Submit = async () => {
     setLoading(true)
     setSearchState(true)
-    const data = await GetFileSearch(searchterm)
+    const data = await GetFileSearch(searchterm, user?.email)
     console.log(data)
     setsearchdata(data)
     setLoading(false)

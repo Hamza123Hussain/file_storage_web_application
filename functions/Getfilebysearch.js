@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-export const GetFileSearch = async (searchterm) => {
+export const GetFileSearch = async (searchterm, Email) => {
   try {
     const response = await axios.get('/api/File/SearchFile', {
-      params: { searchterm },
+      params: { searchterm, Email },
     })
 
     if (response.status === 200) {
