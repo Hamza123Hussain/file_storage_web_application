@@ -13,7 +13,8 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 const Storage = () => {
   const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
-  const { loading, setLoading } = useContext(ParentIdContext)
+  const { loading, setLoading, totalsize, settotalsize } =
+    useContext(ParentIdContext)
   const { user } = useUser()
   const GetfileData = async () => {
     setLoading(true)
@@ -35,6 +36,7 @@ const Storage = () => {
     { totalSize: 0 }
   )
 
+  settotalsize(totalSize)
   const SizeConsumed = (totalSize / 10000).toFixed(2) * 100
   if (loading) {
     return (
@@ -51,9 +53,9 @@ const Storage = () => {
       <h1 className=" text-lg font-bold">Storage Details</h1>
       <div className=" flex flex-col">
         <h1 className=" font-bold">
-          {/* {(totalSize / 1024).toFixed(2)} GB OUT OF 10 GB */}
+          {(totalsize / 1024).toFixed(2)} GB OUT OF 5 GB
         </h1>
-        {/* <div className=" border-2 h-fit ">
+        <div className=" border-2 h-fit ">
           {' '}
           <div
             style={{ width: `${SizeConsumed}%` }}
@@ -67,7 +69,7 @@ const Storage = () => {
           >
             {SizeConsumed}%
           </div>{' '}
-        </div> */}
+        </div>
       </div>
       <div className=" flex flex-col gap-2 ">
         <ImageStorage />

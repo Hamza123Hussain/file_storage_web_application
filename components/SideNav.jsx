@@ -12,7 +12,8 @@ import { ParentIdContext } from '@/utils/Context'
 const Header = () => {
   const [activeindex, setindex] = useState(null)
   const { user, error, isLoading } = useUser()
-  const { setSearchState } = useContext(ParentIdContext)
+  const { setSearchState, totalsize } = useContext(ParentIdContext)
+  console.log('THE TOTAL SIZE', totalsize)
 
   return (
     <header className="p-2 bg-white shadow-md w-full flex flex-col  sm:gap-2 gap-3">
@@ -52,8 +53,17 @@ const Header = () => {
       </div>
       <div className="flex flex-col sm:flex-row  justify-between items-center gap-4 mb-4 sm:mb-0">
         <div className="flex flex-col sm:flex-row  justify-start items-center gap-4 mb-4 sm:mb-0">
-          <CreateFileBTN />
-          <Folderbtn />
+          {totalsize <= 5000 ? (
+            <>
+              <CreateFileBTN />
+              <Folderbtn />
+            </>
+          ) : (
+            <h1 className=" font-bold sm:text-lg text-xs text-justify ">
+              You Have Reached Your Storage Limit. Free up Some Space, If you
+              want to Add More Files
+            </h1>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <h2 className="font-bold text-xl">{user?.name}</h2>

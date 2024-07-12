@@ -10,7 +10,7 @@ export const ParentIdProvider = ({ children }) => {
   const [searchData, setsearchdata] = useState([])
   const [loading, setLoading] = useState(false)
   const [FileData, setFileData] = useState([])
-
+  const [totalsize, settotalsize] = useState(0) // Initialize as empty array
   const [fileStats, setFileStats] = useState(0) // Initialize as empty array
   const [folderData, setFolderData] = useState([])
   return (
@@ -30,6 +30,8 @@ export const ParentIdProvider = ({ children }) => {
         fileStats,
         setFileStats,
         setFolderData,
+        totalsize,
+        settotalsize,
       }}
     >
       {children}
