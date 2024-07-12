@@ -20,7 +20,8 @@ import { ToggleImportant } from '@/functions/ToggleImporant'
 import { GetImportant } from '@/functions/GetImportant'
 
 const FileItem = ({ File }) => {
-  const { parentId, setFileData, setimportant } = useContext(ParentIdContext)
+  const { parentId, setFileData, setimportant, setLoading } =
+    useContext(ParentIdContext)
   const { user } = useUser()
   const [important, setImportant] = useState(File.important || false)
 
@@ -55,6 +56,7 @@ const FileItem = ({ File }) => {
 
   const handleToggleImportant = async () => {
     const result = await ToggleImportant(File.id, important)
+
     if (result) {
       console.log('Important status updated successfully', result)
       setImportant(!important)
@@ -68,6 +70,13 @@ const FileItem = ({ File }) => {
     }
   }
 
+  // if (loading) {
+  //   return (
+  //     <div className=" flex flex-col justify-center items-center">
+  //       <Loader />
+  //     </div>
+  //   )
+  // }
   return (
     <div className="overflow-x-auto border-2 w-full border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
       <table className="table-auto w-full">

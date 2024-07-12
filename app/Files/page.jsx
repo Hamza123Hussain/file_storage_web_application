@@ -40,13 +40,7 @@ const Files = () => {
       </div>
     )
   }
-  if (loading) {
-    return (
-      <div className=" flex flex-col justify-center items-center">
-        <Loader />
-      </div>
-    )
-  }
+
   return (
     <div className="bg-white mt-4 p-3 rounded-lg">
       <h1 className="text-xl font-extrabold">All Files</h1>

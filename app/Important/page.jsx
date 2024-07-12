@@ -1,15 +1,13 @@
 'use client'
 import FileItem from '@/components/Files/FileItem'
 import Loader from '@/components/Loader'
-import { GetImportant } from '@/functions/GetImportant'
+
 import { ParentIdContext } from '@/utils/Context'
-import { useUser } from '@auth0/nextjs-auth0/client'
-import React, { useContext, useEffect, useState } from 'react'
+
+import React, { useContext } from 'react'
 
 const Important = () => {
   const { important, loading } = useContext(ParentIdContext)
-
-  const { user } = useUser()
 
   if (loading)
     return (

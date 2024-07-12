@@ -12,10 +12,12 @@ const FileList = () => {
   const { user } = useUser()
   const Email = user?.email
   const Getdata = async () => {
+    setLoading(true)
     const data = await fetchData(Email)
     if (data) {
       console.log('DATA FETCHED', data)
       setFileData(data)
+      setLoading(false)
     }
   }
 
@@ -30,6 +32,13 @@ const FileList = () => {
         <h1 className=" font-bold text-lg sm:text-xl">NO FILES STORED</h1>
         <CreateFileBTN />
       </div>
+    )
+  }
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
     )
   }
 
