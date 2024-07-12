@@ -17,15 +17,7 @@ import Link from 'next/link'
 const FileItem = ({ File }) => {
   const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
   const { user } = useUser()
-  const Getdata = async () => {
-    setLoading(true)
-    const data = await fetchData(user?.email)
-    if (data) {
-      console.log('DATA FETCHED', data)
-      setFileData(data)
-      setLoading(false)
-    }
-  }
+
   const RemoveFile = async () => {
     setLoading(true)
     const Email = user?.email
