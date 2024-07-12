@@ -8,24 +8,29 @@ import CreateFileBTN from './Files/CreateFile'
 import Folderbtn from './Folder/CreateFolderBtn'
 import Link from 'next/link'
 import { ParentIdContext } from '@/utils/Context'
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
   const [activeindex, setindex] = useState(null)
   const { user, error, isLoading } = useUser()
   const { setSearchState, totalsize } = useContext(ParentIdContext)
+  const router = useRouter()
   console.log('THE TOTAL SIZE', totalsize)
 
   return (
     <header className="p-2 bg-white shadow-md w-full flex flex-col  sm:gap-2 gap-3">
       <div className="flex flex-col sm:flex-row items-center justify-between ">
-        <div className="flex items-center mb-4 sm:mb-0">
+        <div
+          onClick={() => router.push('/')}
+          className="flex items-center mb-4 sm:mb-0 cursor-pointer"
+        >
           <Image
             src={'/cloud_cabinet_logo_green_blue-removebg-preview.png'}
             alt="Logo"
             width={70}
             height={70}
           />
-          <h1 className="text-xl text-blue-500 font-bold capitalize ml-2">
+          <h1 className="text-xl text-blue-500 font-bold  capitalize ml-2">
             Cloud Cabinet
           </h1>
         </div>
