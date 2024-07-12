@@ -30,7 +30,7 @@ const Folderbtn = () => {
   }
 
   const GetFolderData = async () => {
-    const data = await fetchFolderData()
+    const data = await fetchFolderData(user?.email)
     setFolderData(data)
   }
 

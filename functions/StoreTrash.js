@@ -4,7 +4,7 @@ import { deleteFile } from './DeleteFromFIle'
 export const CreateTrash = async (File, Email) => {
   console.log('Trash details', File.Name)
   try {
-    const Response = await axios.post('/api/Trash/CreateTrash', {
+    const response = await axios.post('/api/Trash/CreateTrash', {
       Name: File.Name,
       LastModified: File.LastModified,
       type: File?.type,
@@ -13,24 +13,21 @@ export const CreateTrash = async (File, Email) => {
       CreatedBy: Email,
     })
 
-    if (Response.status === 201) {
-      // console.log('Data inserted successfully:', Response.data)
-      // alert('Data inserted successfully')
-      const isDeleted = await deleteFile(File.id)
-      if (isDeleted) {
-        console.log('File deleted successfully')
-        window.location.reload()
-        return true
+    if (response.status === 201) {
+      console.log('Data inserted successfully:', response.data)
+      const data = await deleteFile(File.id, Email)
+      if (data) {
+        return data
       } else {
         console.error('File deletion failed')
-        return false
+        return null
       }
     } else {
-      console.error('Error inserting data:', Response.data.message)
-      // alert('Failed to insert data')
+      console.error('Error inserting data:', response.data.message)
+      return null
     }
   } catch (error) {
     console.error('Unexpected error:', error)
-    // alert('Unexpected error occurred')
+    return null
   }
 }

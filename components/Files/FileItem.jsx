@@ -26,17 +26,27 @@ const FileItem = ({ File }) => {
       setLoading(false)
     }
   }
-
   const RemoveFile = async () => {
+    setLoading(true)
     const Email = user?.email
     if (!Email) {
       console.error('User email is not available')
       return
     }
 
-    const isSuccess = await CreateTrash(File, Email)
-    if (isSuccess) {
-      Getdata()
+    try {
+      const data = await CreateTrash(File, Email)
+      if (data) {
+        console.log('File moved to trash and data fetched successfully', data)
+        setFileData(data)
+        setLoading(false)
+      } else {
+        console.error('Failed to move file to trash')
+        setLoading(false)
+      }
+    } catch (error) {
+      console.error('Error in RemoveFile:', error)
+      setLoading(false)
     }
   }
 
