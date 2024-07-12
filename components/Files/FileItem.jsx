@@ -12,6 +12,7 @@ import Other from '../../public/Other.png'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { fetchData } from '@/functions/FetchDataFiles'
 import { ParentIdContext } from '@/utils/Context'
+import Link from 'next/link'
 
 const FileItem = ({ File }) => {
   const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
@@ -74,12 +75,12 @@ const FileItem = ({ File }) => {
             <td className="p-4 text-sm w-1/4">{File.LastModified}</td>
             <td className="p-4 text-sm w-1/4">{File.size} MB</td>
             <td className="p-4 flex gap-4 items-center w-1/4">
-              <button className="text-sm">
+              <Link target="_blank" href={File.url} className="text-sm">
                 <Download
                   className="hover:text-green-500 text-green-900"
                   size={20}
                 />
-              </button>
+              </Link>
               <button onClick={RemoveFile} className="text-sm">
                 <Trash className="hover:text-red-500 text-red-900" size={20} />
               </button>
