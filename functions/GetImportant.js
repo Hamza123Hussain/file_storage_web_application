@@ -1,11 +1,10 @@
 import axios from 'axios'
 
-export const GetImporant = async (Email) => {
+export const GetImportant = async (email) => {
   try {
-    const response = await axios.get('/api/Important/Get', {
-      params: { Email },
+    const response = await axios.get('/api/File/GetImportant', {
+      params: { email },
     })
-    // console.log('API Response:', response.data)
     return response.data.data
   } catch (error) {
     console.error('Error fetching data:', error)

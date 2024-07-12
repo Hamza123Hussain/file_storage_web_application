@@ -14,12 +14,16 @@ import { fetchData } from '@/functions/FetchDataFiles'
 import { ParentIdContext } from '@/utils/Context'
 import Link from 'next/link'
 import { CreateImportant } from '@/functions/CreateImportant'
+
 import toast from 'react-hot-toast'
+import { ToggleImportant } from '@/functions/ToggleImporant'
+import { GetImportant } from '@/functions/GetImportant'
 
 const FileItem = ({ File }) => {
-  const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
+  const { parentId, setFileData, setLoading, setimportant } =
+    useContext(ParentIdContext)
   const { user } = useUser()
-  const [imporant, setimportant] = useState(false)
+  const [important, setImportant] = useState(File.important || false)
 
   const RemoveFile = async () => {
     setLoading(true)
@@ -43,7 +47,36 @@ const FileItem = ({ File }) => {
       setLoading(false)
     }
   }
-  const handleAddImportantFile = async () => {
+
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const data = await GetImportant(user?.email)
+      console.log('IMPORTANT:', data)
+      setimportant(data)
+      setLoading(false)
+    } catch (error) {
+      console.log(error.message)
+      setLoading(false)
+    }
+  }
+
+  const handleToggleImportant = async () => {
+    const result = await ToggleImportant(File.id, important)
+    if (result) {
+      console.log('Important status updated successfully', result)
+      setImportant(!important)
+      toast.success(
+        `File marked as ${important ? 'not important' : 'important'}`
+      )
+      await fetchData()
+    } else {
+      console.error('Failed to update important status')
+      toast.error('Error updating important status')
+      setLoading(false)
+    }
+  }
+  /**  const handleAddImportantFile = async () => {
     setimportant(!imporant)
     const email = user?.email
     if (!email) {
@@ -59,7 +92,7 @@ const FileItem = ({ File }) => {
       console.error('Failed to add file to important table')
       toast.error('ERORRR')
     }
-  }
+  } */
 
   return (
     <div className="overflow-x-auto border-2 w-full border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
@@ -111,9 +144,9 @@ const FileItem = ({ File }) => {
               <div>
                 <Star
                   className={` text-black ${
-                    imporant ? 'text-yellow-400' : ''
-                  } `}
-                  onClick={handleAddImportantFile}
+                    important ? 'text-yellow-400' : ''
+                  }`}
+                  onClick={handleToggleImportant}
                 />
               </div>
             </td>
