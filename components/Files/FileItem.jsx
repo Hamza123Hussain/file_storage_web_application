@@ -74,39 +74,29 @@ const FileItem = ({ File }) => {
       setLoading(false)
     }
   }
-  /**  const handleAddImportantFile = async () => {
-    setimportant(!imporant)
-    const email = user?.email
-    if (!email) {
-      console.error('User email is not available')
-      return
-    }
-
-    const result = await CreateImportant(File, email, parentId)
-    if (result) {
-      console.log('File added to important table successfully', result)
-      toast.success('FILE MARKED AS IMPORTANT')
-    } else {
-      console.error('Failed to add file to important table')
-      toast.error('ERORRR')
-    }
-  } */
 
   return (
     <div className="overflow-x-auto border-2 w-full border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
       <table className="table-auto w-full">
         <thead>
           <tr className="bg-gray-200">
-            <th className="p-4 text-left w-1/4">Name</th>
-            <th className="p-4 text-left w-1/4">Created At</th>
-            <th className="p-4 text-left w-1/4">Size</th>
-            <th className="p-4 text-left w-1/4">Options</th>
-            <th className="p-4 text-left w-1/4">Important</th>
+            <th className="p-4 sm:text-lg text-sm text-left w-1/5">Name</th>
+            <th className="p-4 sm:text-lg text-sm text-left w-1/5">
+              <div className="flex gap-1">
+                {' '}
+                <h6>Created</h6>At <h6></h6>
+              </div>
+            </th>
+            <th className="p-4 sm:text-lg text-sm text-left w-1/5">Size</th>
+            <th className="p-4 sm:text-lg text-sm text-left w-1/5">Options</th>
+            <th className="p-4 sm:text-lg text-sm text-left w-1/5">
+              Important
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr className="hover:bg-gray-100">
-            <td className="p-4 flex items-center gap-2 w-2/5">
+            <td className="p-4 border-l-2  flex items-center gap-2 w-3/6">
               <Image
                 src={
                   File.type === 'pdf'
@@ -123,11 +113,17 @@ const FileItem = ({ File }) => {
                 width={30}
                 height={30}
               />
-              <h3 className="text-xs">{File.Name}</h3>
+              <h3 className="sm:text-sm text-xs">{File.Name}</h3>
             </td>
-            <td className="p-4 text-sm w-1/5">{File.LastModified}</td>
-            <td className="p-4 text-sm w-1/5">{File.size} MB</td>
-            <td className="p-4 flex gap-4 items-center w-1/5">
+            <td className="p-4 border-l-2  sm:text-sm text-xs  w-1/6">
+              {File.LastModified}
+            </td>
+            <td className="p-4 sm:text-sm text-xs border-l-2   w-1/6">
+              <div className=" flex gap-1">
+                <h6> {File.size}</h6> <h6>MB</h6>
+              </div>
+            </td>
+            <td className="p-4 flex gap-4 border-l-2  items-center text-xs sm:text-sm w-1/6">
               <Link target="_blank" href={File.url} className="text-sm">
                 <Download
                   className="hover:text-green-500 text-green-900"
@@ -138,15 +134,14 @@ const FileItem = ({ File }) => {
                 <Trash className="hover:text-red-500 text-red-900" size={20} />
               </button>
             </td>
-            <td className="p-4 px-10 cursor-pointer  w-1/5">
-              <div>
-                <Star
-                  className={` text-black ${
-                    important ? 'text-yellow-400' : ''
-                  }`}
-                  onClick={handleToggleImportant}
-                />
-              </div>
+            <td className="p-4 px-8 sm:px-12 border-l-2  cursor-pointer sm:text-sm text-xs   w-1/6">
+              <Star
+                size={20}
+                className={` text-black self-center ${
+                  important ? 'text-yellow-400' : ''
+                }`}
+                onClick={handleToggleImportant}
+              />
             </td>
           </tr>
         </tbody>
