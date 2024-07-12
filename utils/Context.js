@@ -14,6 +14,7 @@ export const ParentIdProvider = ({ children }) => {
   const [fileStats, setFileStats] = useState(0) // Initialize as empty array
   const [folderData, setFolderData] = useState([])
   const [trashData, settrashData] = useState([])
+  const [important, setimportant] = useState([])
   return (
     <ParentIdContext.Provider
       value={{
@@ -33,6 +34,8 @@ export const ParentIdProvider = ({ children }) => {
         setFolderData,
         trashData,
         settrashData,
+        important,
+        setimportant,
         totalsize,
         settotalsize,
       }}
