@@ -1,9 +1,24 @@
 import { DeleteTrash } from '@/functions/DeleteTrash'
+import { GetTrash } from '@/functions/GetTrash'
 import { CreateTrash } from '@/functions/StoreTrash'
+import { ParentIdContext } from '@/utils/Context'
+import { useUser } from '@auth0/nextjs-auth0/client'
 import { Delete, Download } from 'lucide-react'
-import React from 'react'
+import React, { useContext } from 'react'
 
 const TrashItem = ({ File }) => {
+  const { user } = useUser()
+  const { settrashData, setLoading } = useContext(ParentIdContext)
+  const DeleteItem = async () => {
+    const success = await DeleteTrash(File.id)
+    if (success) {
+      setLoading(true)
+      const data = await GetTrash(user?.email)
+      settrashData(data)
+      setLoading(false)
+    }
+  }
+
   return (
     <div>
       <div className="overflow-x-auto border-2 border-slate-100 rounded-lg hover:shadow-md hover:shadow-black">
@@ -25,9 +40,7 @@ const TrashItem = ({ File }) => {
               <td className=" w-1/6 flex gap-2 ">
                 {' '}
                 <button
-                  onClick={() => {
-                    DeleteTrash(File.id)
-                  }}
+                  onClick={DeleteItem}
                   className=" flex gap-2  p-2 bg-red-400 rounded-lg"
                 >
                   <h3>Delete</h3>

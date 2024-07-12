@@ -6,7 +6,7 @@ export const GetTrash = async (Email) => {
       params: { Email },
     })
     // console.log('API Response:', response.data)
-    return response.data
+    return response.data.data
   } catch (error) {
     console.error('Error fetching data:', error)
     throw error

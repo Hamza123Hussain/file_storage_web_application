@@ -10,6 +10,7 @@ export const DeleteTrash = async (id) => {
   })
   if (response.ok) {
     toast.success('File Deleted Successfully')
+    return true
   }
 
   const result = await response.json()

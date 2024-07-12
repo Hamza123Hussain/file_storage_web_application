@@ -1,22 +1,24 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Loader from '@/components/Loader'
 
 import TrashItem from '@/components/TrashItems'
 import { GetTrash } from '@/functions/GetTrash'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { ParentIdContext } from '@/utils/Context'
 
 const Trash = () => {
-  const [trashData, settrashData] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { trashData, settrashData, loading, setLoading } =
+    useContext(ParentIdContext)
+
   const { user } = useUser()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await GetTrash(user?.email)
-        settrashData(data.data)
+        settrashData(data)
       } catch (error) {
         console.log(error.message)
       } finally {
