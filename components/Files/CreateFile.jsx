@@ -20,7 +20,7 @@ const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
   const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
   const { user } = useUser()
-  const [filecreated, setfilecreated] = useState(false)
+
   const Getdata = async () => {
     setLoading(true)
     const data = await fetchData(user?.email)
@@ -31,20 +31,6 @@ const CreateFileBTN = () => {
     }
   }
 
-  // const AddFileTOSupabase = async () => {
-  //   if ((File.File.size / (1024 * 1024)).toFixed(2) < 1000) {
-  //     try {
-  //       await CreateFile(File, parentId)
-  //       setfilecreated(true)
-  //     } catch (error) {
-  //       // Handle error cases
-  //       console.error('Error creating file:', error)
-  //       alert('Failed to create File')
-  //     }
-  //   } else {
-  //     alert('FILE IS LARGER THAN 1 GB')
-  //   }
-  // }
   const handleUploadClick = async () => {
     if ((File.File.size / (1024 * 1024)).toFixed(2) < 50) {
       if (File.File && File.Name && user) {
@@ -57,7 +43,9 @@ const CreateFileBTN = () => {
         )
         if (result.success) {
           console.log('File uploaded successfully', result)
+          toast.success('New File Uploaded')
           Getdata()
+          setFileDetails({ Name: '', File: {}, FileType: '' })
         } else {
           console.error('Error uploading file:', result.message)
         }
@@ -84,12 +72,7 @@ const CreateFileBTN = () => {
     }
     console.log(File)
   }
-  useEffect(() => {
-    if (filecreated) {
-      Getdata()
-      setfilecreated(false)
-    }
-  }, [filecreated])
+
   return (
     <div>
       <Dialog>
