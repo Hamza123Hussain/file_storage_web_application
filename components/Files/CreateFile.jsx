@@ -1,9 +1,9 @@
 'use client'
-import { CreateFile } from '@/functions/CreateFile'
-import { fetchData } from '@/functions/FetchDataFiles'
-import { getFileType } from '@/functions/FileTypesShort'
+import { useContext, useState } from 'react'
 import { ParentIdContext } from '@/utils/Context'
-import React, { useContext, useEffect, useState } from 'react'
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { handleUpload } from '@/functions/FileMaker'
+import toast from 'react-hot-toast'
 import {
   Dialog,
   DialogContent,
@@ -12,24 +12,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { useUser } from '@auth0/nextjs-auth0/client'
-import { handleUpload } from '@/functions/FileMaker'
-import toast from 'react-hot-toast'
+import { getFileType } from '@/functions/FileTypesShort'
 
 const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
-  const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
+  const { parentId, setFileData, setLoading, GetfileData } =
+    useContext(ParentIdContext)
   const { user } = useUser()
-
-  const Getdata = async () => {
-    setLoading(true)
-    const data = await fetchData(user?.email)
-    if (data) {
-      console.log('DATA FETCHED', data)
-      setFileData(data)
-      setLoading(false)
-    }
-  }
 
   const handleUploadClick = async () => {
     if ((File.File.size / (1024 * 1024)).toFixed(2) < 50) {
@@ -44,7 +33,7 @@ const CreateFileBTN = () => {
         if (result.success) {
           console.log('File uploaded successfully', result)
           toast.success('New File Uploaded')
-          Getdata()
+          await GetfileData() // Update storage details
           setFileDetails({ Name: '', File: {}, FileType: '' })
         } else {
           console.error('Error uploading file:', result.message)
@@ -77,7 +66,6 @@ const CreateFileBTN = () => {
     <div>
       <Dialog>
         <DialogTrigger>
-          {' '}
           <button className="w-48 flex gap-2 items-center bg-blue-600 hover:brightness-105 text-white rounded-lg p-3">
             <span className="text-lg">Add A File</span>
             <svg
@@ -99,7 +87,6 @@ const CreateFileBTN = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {' '}
               <h3 className="font-bold text-lg">Add A File</h3>
             </DialogTitle>
             <DialogDescription>
@@ -121,29 +108,26 @@ const CreateFileBTN = () => {
                         type="file"
                         onChange={ChangeValue}
                         className="absolute inset-0 opacity-0 cursor-pointer"
-                        placeholder="Enter File"
                       />
                     </label>
                   </div>
-                  <div className=" flex flex-col justify-center items-center px-12">
+                  <div className="flex flex-col justify-center items-center px-12">
                     <h4 className="text-xs text-gray-400 capitalize">
-                      Note : Only A File Upto 50MB can be Uploaded on This
-                      PlatForm
+                      Note: Only A File Upto 50MB can be Uploaded on This
+                      Platform
                     </h4>
-                    <h4 className="text-[10px] text-gray-400 ">
-                      File Types Supported: .ppt, .pptx, .zip,. rar, .pdf, .doc,
+                    <h4 className="text-[10px] text-gray-400">
+                      File Types Supported: .ppt, .pptx, .zip, .rar, .pdf, .doc,
                       .docx, .jpeg, .webp, .jpg, .png
                     </h4>
                   </div>
-                  {File?.File?.size > 0 ? (
+                  {File?.File?.size > 0 && (
                     <div className="flex justify-between gap-10 items-center text-xs sm:text-sm text-green-400 font-bold">
                       <h3>FileType: {File.FileType}</h3>
                       <h3>
                         Size: {(File.File.size / (1024 * 1024)).toFixed(2)} MB
                       </h3>
                     </div>
-                  ) : (
-                    ''
                   )}
                 </div>
                 <div className="flex justify-end mt-2">

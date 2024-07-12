@@ -20,8 +20,7 @@ import { ToggleImportant } from '@/functions/ToggleImporant'
 import { GetImportant } from '@/functions/GetImportant'
 
 const FileItem = ({ File }) => {
-  const { parentId, setFileData, setimportant, setLoading } =
-    useContext(ParentIdContext)
+  const { parentId, setFileData, GetfileData } = useContext(ParentIdContext)
   const { user } = useUser()
   const [important, setImportant] = useState(File.important || false)
 
@@ -44,39 +43,22 @@ const FileItem = ({ File }) => {
     }
   }
 
-  const fetchData = async () => {
-    try {
-      const data = await GetImportant(user?.email)
-      console.log('IMPORTANT:', data)
-      setimportant(data)
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-
   const handleToggleImportant = async () => {
     const result = await ToggleImportant(File.id, important)
 
     if (result) {
+      await GetfileData()
       console.log('Important status updated successfully', result)
       setImportant(!important)
       toast.success(
         `File marked as ${important ? 'not important' : 'important'}`
       )
-      await fetchData()
     } else {
       console.error('Failed to update important status')
       toast.error('Error updating important status')
     }
   }
 
-  // if (loading) {
-  //   return (
-  //     <div className=" flex flex-col justify-center items-center">
-  //       <Loader />
-  //     </div>
-  //   )
-  // }
   return (
     <div className="overflow-x-auto border-2 w-full border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
       <table className="table-auto w-full">
