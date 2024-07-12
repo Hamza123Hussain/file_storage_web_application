@@ -91,26 +91,16 @@
 
 // export default Storage
 
+'use client'
 import React, { useContext, useEffect, useState } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { ParentIdContext } from '@/utils/Context'
-import { GetFiles } from '@/functions/GetFiles'
 import Loader from '@/components/Loader'
 
 const FileStatistics = () => {
-  const [error, setError] = useState(null)
-  const { totalsize, settotalsize, FileData, setFileData, loading } =
+  const { totalsize, settotalsize, FileData, GetfileData, loading } =
     useContext(ParentIdContext)
   const { user } = useUser()
-
-  const GetfileData = async () => {
-    try {
-      const data = await GetFiles(user?.email)
-      setFileData(data)
-    } catch (error) {
-      setError(error.message)
-    }
-  }
 
   useEffect(() => {
     if (user?.email) {
@@ -147,9 +137,9 @@ const FileStatistics = () => {
     )
   }
 
-  if (loading) {
-    return <Loader />
-  }
+  // if (loading) {
+  //   return <Loader />
+  // }
 
   return (
     <div className="mt-10">

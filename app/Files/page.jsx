@@ -1,42 +1,35 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Loader from '@/components/Loader'
 import FileItem from '@/components/Files/FileItem'
-import { GetFiles } from '@/functions/GetFiles'
 import { ParentIdContext } from '@/utils/Context'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import CreateFileBTN from '@/components/Files/CreateFile'
 
 const Files = () => {
   const { user } = useUser()
-  const Email = user?.email
-  const { FileData, setFileData, setLoading, loading } =
+  const { FileData, setFileData, setLoading, loading, GetfileData } =
     useContext(ParentIdContext)
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const data = await GetFiles(Email)
-        setFileData(data)
-        setLoading(false)
-      } catch (error) {
-        console.log(error)
-        setLoading(false)
-      }
+    if (user?.email) {
+      GetfileData()
     }
+  }, [user?.email])
 
-    if (Email) {
-      fetchData()
-    }
-  }, [])
-
-  if (FileData.length == 0) {
+  if (FileData.length === 0 && !loading) {
     return (
-      <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
-        {' '}
-        <h1 className=" font-bold text-lg sm:text-xl">NO FILES STORED</h1>
+      <div className="border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
+        <h1 className="font-bold text-lg sm:text-xl">NO FILES STORED</h1>
         <CreateFileBTN />
+      </div>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <Loader />
       </div>
     )
   }
