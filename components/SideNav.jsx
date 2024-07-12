@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation'
 
 const Header = () => {
   const [activeindex, setindex] = useState(null)
-  const { user, error, isLoading } = useUser()
+  const { user } = useUser()
   const { setSearchState, totalsize } = useContext(ParentIdContext)
   const router = useRouter()
   console.log('THE TOTAL SIZE', totalsize)
@@ -45,12 +45,14 @@ const Header = () => {
                   setindex(index)
                   setSearchState(false)
                 }}
-                className={`p-2 rounded-lg hover:bg-blue-400 ${
+                className={`p-2 rounded-lg flex flex-col items-center  gap-2  hover:bg-blue-400 ${
                   index === activeindex ? 'bg-pink-600 ' : ''
                 }`}
               >
                 {element.Icon}
-                <span className=" text-xs sm:inline">{element.Name}</span>
+                <span className=" text-xs sm:inline text-center">
+                  {element.Name}
+                </span>
               </Link>
             ))}
           </nav>
