@@ -142,8 +142,15 @@ const CreateFileBTN = () => {
                       />
                     </label>
                   </div>
-                  <div className="text-xs text-gray-400 capitalize">
-                    Note : Only A File Upto 1GB can be Uploaded on This Website
+                  <div className=" flex flex-col justify-center items-center px-12">
+                    <h4 className="text-xs text-gray-400 capitalize">
+                      Note : Only A File Upto 50MB can be Uploaded on This
+                      PlatForm
+                    </h4>
+                    <h4 className="text-[10px] text-gray-400 ">
+                      File Types Supported: .ppt, .pptx, .zip,. rar, .pdf, .doc,
+                      .docx, .jpeg, .webp, .jpg, .png
+                    </h4>
                   </div>
                   {File?.File?.size > 0 ? (
                     <div className="flex justify-between gap-10 items-center text-xs sm:text-sm text-green-400 font-bold">
