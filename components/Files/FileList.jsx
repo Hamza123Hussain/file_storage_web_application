@@ -26,6 +26,10 @@ const Files = () => {
     )
   }
 
+  if (FileData.length > 0) {
+    console.log(FileData)
+  }
+
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center">
@@ -34,11 +38,16 @@ const Files = () => {
     )
   }
 
+  // Sort the FileData based on LastModified date
+  const sortedFileData = [...FileData].sort(
+    (a, b) => new Date(b.LastModified) - new Date(a.LastModified)
+  )
+
   return (
     <div className="bg-white mt-4 p-3 rounded-lg">
-      <h1 className="text-xl font-extrabold">All Files</h1>
+      <h1 className="text-xl font-extrabold">Recent Files</h1>
       <div className="grid grid-cols-1 gap-2">
-        {FileData.slice(0, 3).map((element) => (
+        {sortedFileData.slice(0, 3).map((element) => (
           <div key={element.id}>
             <FileItem File={element} />
           </div>
