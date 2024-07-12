@@ -50,11 +50,9 @@ const FileItem = ({ File }) => {
 
   const fetchData = async () => {
     try {
-      setLoading(true)
       const data = await GetImportant(user?.email)
       console.log('IMPORTANT:', data)
       setimportant(data)
-      setLoading(false)
     } catch (error) {
       console.log(error.message)
       setLoading(false)
