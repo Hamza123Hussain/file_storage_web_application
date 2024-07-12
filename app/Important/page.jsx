@@ -1,14 +1,28 @@
 'use client'
 import FileItem from '@/components/Files/FileItem'
 import Loader from '@/components/Loader'
+import { GetImportant } from '@/functions/GetImportant'
 
 import { ParentIdContext } from '@/utils/Context'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 const Important = () => {
-  const { important, loading } = useContext(ParentIdContext)
+  const { loading, setLoading } = useContext(ParentIdContext)
+  const [important, setimportant] = useState([])
+  const { user } = useUser()
+  const ImportantFiles = async () => {
+    setLoading(true)
+    const data = await GetImportant(user?.email)
+    setimportant(data)
+    setLoading(false)
+  }
 
+  useEffect(() => {
+    ImportantFiles()
+  }, [])
+  console.log('I AM IMPORTANT', important)
   if (loading)
     return (
       <div>
