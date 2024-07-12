@@ -12,25 +12,16 @@ const FileList = () => {
   const { user } = useUser()
   const Email = user?.email
   const Getdata = async () => {
-    setLoading(true)
     const data = await fetchData(Email)
     if (data) {
       console.log('DATA FETCHED', data)
       setFileData(data)
-      setLoading(false)
     }
   }
 
   useEffect(() => {
     Getdata()
   }, [])
-
-  if (loading)
-    return (
-      <div>
-        <Loader />
-      </div>
-    )
 
   if (FileData.length == 0) {
     return (

@@ -20,13 +20,11 @@ import { ToggleImportant } from '@/functions/ToggleImporant'
 import { GetImportant } from '@/functions/GetImportant'
 
 const FileItem = ({ File }) => {
-  const { parentId, setFileData, setLoading, setimportant } =
-    useContext(ParentIdContext)
+  const { parentId, setFileData, setimportant } = useContext(ParentIdContext)
   const { user } = useUser()
   const [important, setImportant] = useState(File.important || false)
 
   const RemoveFile = async () => {
-    setLoading(true)
     const Email = user?.email
     if (!Email) {
       console.error('User email is not available')
@@ -37,14 +35,11 @@ const FileItem = ({ File }) => {
       if (data) {
         console.log('File moved to trash and data fetched successfully', data)
         setFileData(data)
-        setLoading(false)
       } else {
         console.error('Failed to move file to trash')
-        setLoading(false)
       }
     } catch (error) {
       console.error('Error in RemoveFile:', error)
-      setLoading(false)
     }
   }
 
@@ -55,7 +50,6 @@ const FileItem = ({ File }) => {
       setimportant(data)
     } catch (error) {
       console.log(error.message)
-      setLoading(false)
     }
   }
 
@@ -71,7 +65,6 @@ const FileItem = ({ File }) => {
     } else {
       console.error('Failed to update important status')
       toast.error('Error updating important status')
-      setLoading(false)
     }
   }
 

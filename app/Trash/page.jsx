@@ -17,6 +17,7 @@ const Trash = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true)
         const data = await GetTrash(user?.email)
         settrashData(data)
       } catch (error) {
@@ -36,7 +37,16 @@ const Trash = () => {
       </div>
     )
 
-  // if (trashData.length > 1) console.log('trash data:', trashData)
+  if (trashData.length == 0) {
+    return (
+      <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
+        {' '}
+        <h1 className=" font-bold text-lg sm:text-xl">
+          No Files Marked As Important
+        </h1>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-white mt-4 p-3 rounded-lg ">

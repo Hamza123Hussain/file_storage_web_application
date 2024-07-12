@@ -16,14 +16,11 @@ const FolderList = () => {
   const [error, setError] = useState(null)
   const { user } = useUser()
   const GetFolderData = async () => {
-    setLoading(true)
     try {
       const data = await fetchFolderData(user?.email)
       setFolderData(data)
-      setLoading(false)
     } catch (error) {
       setError(error.message)
-      setLoading(false)
     }
   }
 
@@ -31,13 +28,6 @@ const FolderList = () => {
     GetFolderData()
   }, [])
 
-  if (loading) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    )
-  }
   if (folderData.length == 0) {
     return (
       <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">

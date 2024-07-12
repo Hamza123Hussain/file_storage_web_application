@@ -11,7 +11,7 @@ export const ParentIdProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
   const [FileData, setFileData] = useState([])
   const [totalsize, settotalsize] = useState(0) // Initialize as empty array
-  const [fileStats, setFileStats] = useState(0) // Initialize as empty array
+
   const [folderData, setFolderData] = useState([])
   const [trashData, settrashData] = useState([])
   const [important, setimportant] = useState([])
@@ -29,8 +29,7 @@ export const ParentIdProvider = ({ children }) => {
         FileData,
         setFileData,
         folderData,
-        fileStats,
-        setFileStats,
+
         setFolderData,
         trashData,
         settrashData,

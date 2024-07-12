@@ -11,16 +11,15 @@ import Loader from './Loader'
 import { useUser } from '@auth0/nextjs-auth0/client'
 
 const Storage = () => {
-  const [fileStats, setFileStats] = useState([]) // Initialize as empty array
   const [error, setError] = useState(null)
-  const { loading, setLoading, totalsize, settotalsize } =
+  const { totalsize, settotalsize, FileData, setFileData } =
     useContext(ParentIdContext)
   const { user } = useUser()
   const GetfileData = async () => {
-    setLoading(true)
+    // setLoading(true)
     const data = await GetFiles(user?.email)
-    setFileStats(data)
-    setLoading(false)
+    setFileData(data)
+    // setLoading(false)
   }
 
   useEffect(() => {
@@ -28,9 +27,9 @@ const Storage = () => {
   }, [])
 
   // Calculate total number of files and their cumulative size using reduce
-  const { totalSize } = fileStats.reduce(
+  const { totalSize } = FileData.reduce(
     (accumulator, file) => {
-      accumulator.totalSize += file.size // Assuming each file object in fileStats has a 'size' property
+      accumulator.totalSize += file.size // Assuming each file object in FileData has a 'size' property
       return accumulator
     },
     { totalSize: 0 }
@@ -38,16 +37,16 @@ const Storage = () => {
 
   settotalsize(totalSize)
   const SizeConsumed = (totalSize / 10000).toFixed(2) * 100
-  if (loading) {
+
+  if (FileData.length == 0) {
     return (
-      <div className=" flex flex-col justify-center items-center">
-        <Loader />
+      <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
+        {' '}
+        <h1 className=" font-bold text-lg sm:text-xl">No Files Stored</h1>
       </div>
     )
   }
-  if (totalSize <= 0) {
-    return <></>
-  }
+
   return (
     <div className="flex flex-col gap-2 ">
       <h1 className=" text-lg font-bold">Storage Details</h1>

@@ -10,13 +10,13 @@ import CreateFileBTN from '@/components/Files/CreateFile'
 const Files = () => {
   const { user } = useUser()
   const Email = user?.email
-  const { FileData, setFileData, loading, setLoading } =
+  const { FileData, setFileData, setLoading, loading } =
     useContext(ParentIdContext)
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
       try {
+        setLoading(true)
         const data = await GetFiles(Email)
         setFileData(data)
         setLoading(false)
@@ -31,18 +31,19 @@ const Files = () => {
     }
   }, [])
 
-  if (loading)
-    return (
-      <div>
-        <Loader />
-      </div>
-    )
   if (FileData.length == 0) {
     return (
       <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
         {' '}
         <h1 className=" font-bold text-lg sm:text-xl">NO FILES STORED</h1>
         <CreateFileBTN />
+      </div>
+    )
+  }
+  if (loading) {
+    return (
+      <div className=" flex flex-col justify-center items-center">
+        <Loader />
       </div>
     )
   }
