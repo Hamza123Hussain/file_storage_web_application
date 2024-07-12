@@ -16,8 +16,7 @@ import { getFileType } from '@/functions/FileTypesShort'
 
 const CreateFileBTN = () => {
   const [File, setFileDetails] = useState({ Name: '', File: {}, FileType: '' })
-  const { parentId, setFileData, setLoading, GetfileData } =
-    useContext(ParentIdContext)
+  const { parentId, GetfileData } = useContext(ParentIdContext)
   const { user } = useUser()
 
   const handleUploadClick = async () => {
