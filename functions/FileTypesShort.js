@@ -11,6 +11,7 @@ export const getFileType = (mimeType) => {
     'application/vnd.ms-powerpoint': 'document',
     'application/vnd.openxmlformats-officedocument.presentationml.presentation':
       'document',
+    'audio/mpeg': 'mp3',
     // Add more mappings as needed
   }
   return mimeTypes[mimeType] || 'others'

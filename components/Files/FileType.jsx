@@ -5,6 +5,7 @@ import PDF from '../../public/Pdf.png'
 import DOC from '../../public/DOC.png'
 import VIDEO from '../../public/Video.png'
 import OTHER from '../../public/Other.png'
+import MP3 from '../../public/MP3.png'
 
 const FILETYPE = ({ type, size, count }) => {
   return (
@@ -19,6 +20,8 @@ const FILETYPE = ({ type, size, count }) => {
               ? IMAGE
               : type == 'document'
               ? DOC
+              : type == 'mp3'
+              ? MP3
               : type == 'mp4'
               ? VIDEO
               : OTHER
