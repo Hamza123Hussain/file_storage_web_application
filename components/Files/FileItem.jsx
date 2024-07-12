@@ -1,8 +1,8 @@
 'use client'
 import { CreateTrash } from '@/functions/StoreTrash'
-import { Delete, Download, Trash } from 'lucide-react'
+import { Delete, Download, Star, Trash } from 'lucide-react'
 import Image from 'next/image'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import DOC from '../../public/DOC.png'
 import PDF from '../../public/Pdf.png'
 import Images from '../../public/Image.png'
@@ -13,10 +13,13 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import { fetchData } from '@/functions/FetchDataFiles'
 import { ParentIdContext } from '@/utils/Context'
 import Link from 'next/link'
+import { CreateImportant } from '@/functions/CreateImportant'
+import toast from 'react-hot-toast'
 
 const FileItem = ({ File }) => {
   const { parentId, setFileData, setLoading } = useContext(ParentIdContext)
   const { user } = useUser()
+  const [imporant, setimportant] = useState(false)
 
   const RemoveFile = async () => {
     setLoading(true)
@@ -25,7 +28,6 @@ const FileItem = ({ File }) => {
       console.error('User email is not available')
       return
     }
-
     try {
       const data = await CreateTrash(File, Email)
       if (data) {
@@ -41,6 +43,23 @@ const FileItem = ({ File }) => {
       setLoading(false)
     }
   }
+  const handleAddImportantFile = async () => {
+    setimportant(!imporant)
+    const email = user?.email
+    if (!email) {
+      console.error('User email is not available')
+      return
+    }
+
+    const result = await CreateImportant(File, email, parentId)
+    if (result) {
+      console.log('File added to important table successfully', result)
+      toast.success('FILE MARKED AS IMPORTANT')
+    } else {
+      console.error('Failed to add file to important table')
+      toast.error('ERORRR')
+    }
+  }
 
   return (
     <div className="overflow-x-auto border-2 w-full border-slate-100 rounded-lg hover:shadow-md hover:shadow-black mb-4">
@@ -51,11 +70,12 @@ const FileItem = ({ File }) => {
             <th className="p-4 text-left w-1/4">Created At</th>
             <th className="p-4 text-left w-1/4">Size</th>
             <th className="p-4 text-left w-1/4">Options</th>
+            <th className="p-4 text-left w-1/4">Important</th>
           </tr>
         </thead>
         <tbody>
           <tr className="hover:bg-gray-100">
-            <td className="p-4 flex items-center gap-2 w-2/4">
+            <td className="p-4 flex items-center gap-2 w-2/5">
               <Image
                 src={
                   File.type === 'pdf'
@@ -74,9 +94,9 @@ const FileItem = ({ File }) => {
               />
               <h3 className="text-xs">{File.Name}</h3>
             </td>
-            <td className="p-4 text-sm w-1/4">{File.LastModified}</td>
-            <td className="p-4 text-sm w-1/4">{File.size} MB</td>
-            <td className="p-4 flex gap-4 items-center w-1/4">
+            <td className="p-4 text-sm w-1/5">{File.LastModified}</td>
+            <td className="p-4 text-sm w-1/5">{File.size} MB</td>
+            <td className="p-4 flex gap-4 items-center w-1/5">
               <Link target="_blank" href={File.url} className="text-sm">
                 <Download
                   className="hover:text-green-500 text-green-900"
@@ -86,6 +106,16 @@ const FileItem = ({ File }) => {
               <button onClick={RemoveFile} className="text-sm">
                 <Trash className="hover:text-red-500 text-red-900" size={20} />
               </button>
+            </td>
+            <td className="p-4 px-10 cursor-pointer  w-1/5">
+              <div>
+                <Star
+                  className={` text-black ${
+                    imporant ? 'text-yellow-400' : ''
+                  } `}
+                  onClick={handleAddImportantFile}
+                />
+              </div>
             </td>
           </tr>
         </tbody>
