@@ -1,6 +1,6 @@
 'use client'
 import { CreateTrash } from '@/functions/StoreTrash'
-import { Delete, Download, Star, Trash } from 'lucide-react'
+import { Download, Star, Trash } from 'lucide-react'
 import Image from 'next/image'
 import React, { useContext, useState } from 'react'
 import DOC from '../../public/DOC.png'
@@ -10,17 +10,15 @@ import Video from '../../public/Video.png'
 import Other from '../../public/Other.png'
 
 import { useUser } from '@auth0/nextjs-auth0/client'
-import { fetchData } from '@/functions/FetchDataFiles'
+
 import { ParentIdContext } from '@/utils/Context'
 import Link from 'next/link'
-import { CreateImportant } from '@/functions/CreateImportant'
 
 import toast from 'react-hot-toast'
 import { ToggleImportant } from '@/functions/ToggleImporant'
-import { GetImportant } from '@/functions/GetImportant'
 
 const FileItem = ({ File }) => {
-  const { parentId, setFileData, GetfileData } = useContext(ParentIdContext)
+  const { setFileData, GetfileData } = useContext(ParentIdContext)
   const { user } = useUser()
   const [important, setImportant] = useState(File.important || false)
 

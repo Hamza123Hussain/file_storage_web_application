@@ -45,10 +45,6 @@ const FileStatistics = () => {
     )
   }
 
-  // if (loading) {
-  //   return <Loader />
-  // }
-
   return (
     <div className="flex flex-col gap-2 ">
       <h1 className=" text-lg font-bold">Storage Details</h1>

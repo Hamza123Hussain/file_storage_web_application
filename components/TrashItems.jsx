@@ -1,9 +1,9 @@
 import { DeleteTrash } from '@/functions/DeleteTrash'
 import { GetTrash } from '@/functions/GetTrash'
-import { CreateTrash } from '@/functions/StoreTrash'
+
 import { ParentIdContext } from '@/utils/Context'
 import { useUser } from '@auth0/nextjs-auth0/client'
-import { Delete, Download } from 'lucide-react'
+import { Delete } from 'lucide-react'
 import React, { useContext } from 'react'
 import Image from 'next/image'
 import DOC from '../public/DOC.png'
@@ -14,7 +14,7 @@ import Other from '../public/Other.png'
 
 const TrashItem = ({ File }) => {
   const { user } = useUser()
-  const { settrashData, setLoading } = useContext(ParentIdContext)
+  const { settrashData } = useContext(ParentIdContext)
 
   const DeleteItem = async () => {
     const success = await DeleteTrash(File.id)

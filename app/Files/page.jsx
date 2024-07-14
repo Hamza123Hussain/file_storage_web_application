@@ -8,8 +8,7 @@ import CreateFileBTN from '@/components/Files/CreateFile'
 
 const Files = () => {
   const { user } = useUser()
-  const { FileData, setFileData, setLoading, loading, GetfileData } =
-    useContext(ParentIdContext)
+  const { FileData, loading, GetfileData } = useContext(ParentIdContext)
 
   useEffect(() => {
     if (user?.email) {

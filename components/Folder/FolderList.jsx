@@ -13,7 +13,7 @@ const FolderList = () => {
   const { folderData, setFolderData, loading, setLoading } =
     useContext(ParentIdContext)
 
-  const [error, setError] = useState(null)
+  const [setError] = useState(null)
   const { user } = useUser()
   const GetFolderData = async () => {
     setLoading(true)
