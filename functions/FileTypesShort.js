@@ -14,5 +14,5 @@ export const getFileType = (mimeType) => {
     'audio/mpeg': 'mp3',
     // Add more mappings as needed
   }
-  return mimeTypes[mimeType] || 'others'
+  return mimeTypes.mimeType || 'others'
 }
