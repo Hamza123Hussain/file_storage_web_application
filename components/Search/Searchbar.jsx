@@ -32,11 +32,7 @@ const Searchbar = () => {
         onChange={(e) => setsearch(e.target.value)}
       />
 
-      <Search
-        onClick={() => handleSearch(searchterm, user?.email)}
-        size={40}
-        className="cursor-pointer"
-      />
+      <Search onClick={() => Submit()} size={40} className="cursor-pointer" />
     </div>
   )
 }
