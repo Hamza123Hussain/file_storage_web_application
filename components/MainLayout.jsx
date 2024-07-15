@@ -39,7 +39,7 @@ export default function MainLayout({ children }) {
             <div className=" p-2">{children}</div>
           )}
         </div>
-        <div className="p-2 bg-transparent border-2 sm:w-10/12 w-full">
+        <div className="p-2 bg-transparent  sm:w-10/12 w-full">
           <Storage />
         </div>
       </div>

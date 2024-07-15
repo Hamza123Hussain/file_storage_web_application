@@ -39,10 +39,9 @@ const Trash = () => {
 
   if (trashData.length == 0) {
     return (
-      <div className=" border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
-        {' '}
-        <h1 className=" font-bold text-lg sm:text-xl">
-          No Files Marked As Important
+      <div className="border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center bg-[#E0F7FA]">
+        <h1 className="font-bold text-lg sm:text-xl text-[#ff3333]">
+          No Files in Trash{' '}
         </h1>
       </div>
     )

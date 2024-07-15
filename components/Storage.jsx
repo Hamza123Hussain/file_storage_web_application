@@ -39,14 +39,16 @@ const FileStatistics = () => {
 
   if (FileData.length === 0) {
     return (
-      <div className="border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center">
-        <h1 className="font-bold text-lg sm:text-xl">No Files Stored</h1>
+      <div className="border-2 gap-3 sm:gap-5 rounded-lg border-slate-700 p-10 flex flex-col mt-20 justify-center items-center bg-[#E0F7FA]">
+        <h1 className="font-bold text-lg sm:text-xl text-[#00796B]">
+          No Files Stored
+        </h1>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col gap-2 ">
+    <div className=" mt-5 flex flex-col gap-2 bg-blue-300 text-white p-4 h-[100vh] rounded-lg">
       <h1 className=" text-lg font-bold">Storage Details</h1>
       <div className=" flex flex-col">
         <h1 className=" font-bold">
