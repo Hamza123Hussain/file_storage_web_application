@@ -28,14 +28,14 @@ const Home = () => {
       {/* Body */}
       <main className="flex-grow flex flex-col items-center justify-center text-center p-4 bg-green-400">
         <h2 className="text-3xl font-bold mb-4">Welcome to Cloud Cabinet</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
+        <div className="grid gap-6 sm:grid-cols-2  max-w-6xl">
           <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
             <h3 className="text-xl font-bold mb-2 text-blue-600">
-              Store up to 1GB
+              Store up to 5 GB
             </h3>
             <p className="text-gray-700">
-              Securely store your files with a total storage capacity of up to
-              1GB. Enjoy ample space for all your important documents, images,
+              Securely store your files with a total storage capacity of up to 5
+              GB. Enjoy ample space for all your important documents, images,
               and videos.
             </p>
           </div>
@@ -49,16 +49,7 @@ const Home = () => {
               files are protected from unauthorized access.
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
-            <h3 className="text-xl font-bold mb-2 text-blue-600">
-              Reliable Platform
-            </h3>
-            <p className="text-gray-700">
-              Cloud Cabinet provides a reliable platform for all your file
-              storage needs, ensuring that your data is always accessible when
-              you need it.
-            </p>
-          </div>
+
           <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
             <h3 className="text-xl font-bold mb-2 text-blue-600">
               Easy-to-Use Interface
