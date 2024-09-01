@@ -48,7 +48,7 @@ const FileStatistics = () => {
   }
 
   return (
-    <div className=" mt-5 flex flex-col gap-2 bg-blue-300 text-white p-4 h-[100vh] rounded-lg">
+    <div className=" mt-5 flex flex-col gap-2 bg-blue-300 text-white p-4  rounded-lg">
       <h1 className=" text-lg font-bold">Storage Details</h1>
       <div className=" flex flex-col">
         <h1 className=" font-bold">
