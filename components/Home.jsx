@@ -31,23 +31,15 @@ const Home = () => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
           <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
             <h3 className="text-xl font-bold mb-2 text-blue-600">
-              Store up to 10GB
+              Store up to 1GB
             </h3>
             <p className="text-gray-700">
               Securely store your files with a total storage capacity of up to
-              10GB. Enjoy ample space for all your important documents, images,
+              1GB. Enjoy ample space for all your important documents, images,
               and videos.
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
-            <h3 className="text-xl font-bold mb-2 text-blue-600">
-              Max File Size of 1GB
-            </h3>
-            <p className="text-gray-700">
-              Upload files with a maximum size of 1GB each. Perfect for large
-              documents, high-resolution images, and lengthy videos.
-            </p>
-          </div>
+
           <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
             <h3 className="text-xl font-bold mb-2 text-blue-600">
               Secure Storage
